@@ -1,0 +1,1657 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pétalos & Detalles — Flores artesanales y desayunos sorpresa</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rose: #e8b4b8;
+    --rose-light: #f7e8ea;
+    --rose-deep: #c4818a;
+    --blush: #f9f0f1;
+    --beige: #f5ede6;
+    --beige-warm: #ede0d4;
+    --lila: #d8c5e0;
+    --lila-soft: #f0eaf4;
+    --cream: #fdfaf7;
+    --text-dark: #3d2c2e;
+    --text-mid: #7a5c60;
+    --text-soft: #a98c8f;
+    --gold: #c9a96e;
+    --gold-light: #f0e6d3;
+    --white: #ffffff;
+    --shadow: 0 4px 24px rgba(61,44,46,0.08);
+    --shadow-hover: 0 8px 32px rgba(61,44,46,0.15);
+    --radius: 20px;
+    --radius-sm: 12px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    line-height: 1.2;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    background: rgba(253,250,247,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--beige-warm);
+    padding: 0 2rem;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-style: italic;
+    color: var(--rose-deep);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+
+  .nav-logo span { font-style: normal; color: var(--gold); }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-mid);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--rose-deep); }
+
+  .nav-wa {
+    background: var(--rose-deep);
+    color: white !important;
+    padding: 0.5rem 1.2rem;
+    border-radius: 100px;
+    font-size: 0.75rem !important;
+    letter-spacing: 0.1em;
+    transition: background 0.2s, transform 0.1s !important;
+  }
+
+  .nav-wa:hover { background: var(--text-dark) !important; transform: none; }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+  }
+
+  .hamburger span {
+    width: 22px; height: 2px;
+    background: var(--text-dark);
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+
+  /* ── HERO ── */
+  #inicio {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding-top: 64px;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 80% 50%, #f7e0e4 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 20% 80%, #ede0d4 0%, transparent 60%),
+      var(--cream);
+  }
+
+  .hero-decor {
+    position: absolute;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    border: 1px solid var(--rose-light);
+    right: -100px; top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  .hero-decor::before {
+    content: '';
+    position: absolute;
+    inset: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--rose-light);
+  }
+
+  .hero-decor::after {
+    content: '';
+    position: absolute;
+    inset: 80px;
+    border-radius: 50%;
+    border: 1px solid var(--rose-light);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .hero-text {
+    animation: fadeUp 0.8s ease both;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: var(--gold-light);
+    padding: 0.4rem 1rem;
+    border-radius: 100px;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-title {
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+    line-height: 1.05;
+  }
+
+  .hero-title em {
+    color: var(--rose-deep);
+    font-style: italic;
+  }
+
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    color: var(--text-soft);
+    font-style: italic;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-desc {
+    font-size: 0.95rem;
+    color: var(--text-mid);
+    max-width: 420px;
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--rose-deep);
+    color: white;
+    padding: 0.9rem 2rem;
+    border-radius: 100px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+    transition: all 0.2s;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .btn-primary:hover {
+    background: var(--text-dark);
+    transform: translateY(-1px);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--text-dark);
+    padding: 0.9rem 2rem;
+    border-radius: 100px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    border: 1px solid var(--beige-warm);
+    transition: all 0.2s;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .btn-outline:hover {
+    border-color: var(--rose-deep);
+    color: var(--rose-deep);
+    transform: translateY(-1px);
+  }
+
+  .hero-image-wrap {
+    position: relative;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+
+  .hero-image-card {
+    background: var(--rose-light);
+    border-radius: 40% 60% 55% 45% / 45% 40% 60% 55%;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-float-badge {
+    position: absolute;
+    background: white;
+    border-radius: 16px;
+    padding: 0.75rem 1.2rem;
+    box-shadow: var(--shadow);
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .hero-float-badge.one { bottom: 10%; left: -8%; }
+  .hero-float-badge.two { top: 15%; right: -5%; }
+
+  .float-icon { font-size: 1.4rem; }
+
+  .float-text { display: flex; flex-direction: column; }
+  .float-text strong { font-weight: 500; font-size: 0.8rem; color: var(--text-dark); }
+  .float-text span { font-size: 0.7rem; color: var(--text-soft); }
+
+  /* ── TRUST BAR ── */
+  .trust-bar {
+    background: var(--rose-deep);
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    flex-wrap: wrap;
+  }
+
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    opacity: 0.95;
+  }
+
+  .trust-item svg { width: 16px; height: 16px; fill: currentColor; opacity: 0.7; }
+
+  /* ── SECTIONS ── */
+  section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+  }
+
+  .section-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+  }
+
+  .section-title em { color: var(--rose-deep); font-style: italic; }
+
+  .section-sub {
+    color: var(--text-soft);
+    font-size: 0.95rem;
+    max-width: 500px;
+    line-height: 1.8;
+  }
+
+  /* ── CATALOG ── */
+  #catalogo { scroll-margin-top: 64px; }
+
+  .filter-bar {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    margin: 2.5rem 0 2rem;
+  }
+
+  .filter-btn {
+    padding: 0.5rem 1.2rem;
+    border-radius: 100px;
+    border: 1px solid var(--beige-warm);
+    background: transparent;
+    color: var(--text-mid);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .filter-btn:hover, .filter-btn.active {
+    background: var(--rose-deep);
+    border-color: var(--rose-deep);
+    color: white;
+  }
+
+  .catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .product-card {
+    background: white;
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: all 0.3s;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .product-card:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-4px);
+  }
+
+  .card-img {
+    aspect-ratio: 4/3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  .card-cat-badge {
+    position: absolute;
+    top: 1rem; left: 1rem;
+    background: rgba(255,255,255,0.92);
+    color: var(--text-mid);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.8rem;
+    border-radius: 100px;
+    backdrop-filter: blur(4px);
+  }
+
+  .card-occasion {
+    position: absolute;
+    top: 1rem; right: 1rem;
+    background: var(--gold);
+    color: white;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.8rem;
+    border-radius: 100px;
+  }
+
+  .card-body {
+    padding: 1.25rem 1.25rem 1.5rem;
+  }
+
+  .card-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    color: var(--text-dark);
+    margin-bottom: 0.4rem;
+    font-weight: 500;
+  }
+
+  .card-desc {
+    font-size: 0.82rem;
+    color: var(--text-soft);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .card-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    color: var(--rose-deep);
+    font-weight: 500;
+  }
+
+  .card-price small {
+    font-size: 0.65rem;
+    color: var(--text-soft);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    display: block;
+    letter-spacing: 0.05em;
+  }
+
+  .card-wa-btn {
+    background: #25D366;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 100px;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .card-wa-btn:hover { background: #1ebe5a; transform: scale(1.05); }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(61,44,46,0.5);
+    z-index: 2000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    backdrop-filter: blur(4px);
+  }
+
+  .modal-overlay.open { display: flex; }
+
+  .modal {
+    background: var(--cream);
+    border-radius: var(--radius);
+    max-width: 640px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    animation: modalIn 0.3s ease both;
+  }
+
+  @keyframes modalIn {
+    from { opacity: 0; transform: scale(0.95) translateY(10px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 1rem; right: 1rem;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: white;
+    border: 1px solid var(--beige-warm);
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-mid);
+    transition: all 0.2s;
+    z-index: 1;
+  }
+
+  .modal-close:hover { background: var(--rose-light); color: var(--rose-deep); }
+
+  .modal-img {
+    aspect-ratio: 16/9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius) var(--radius) 0 0;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  .modal-body {
+    padding: 1.75rem 2rem 2rem;
+  }
+
+  .modal-cat {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+
+  .modal-title {
+    font-size: 2rem;
+    color: var(--text-dark);
+    margin-bottom: 0.4rem;
+  }
+
+  .modal-occasion-pill {
+    display: inline-block;
+    background: var(--rose-light);
+    color: var(--rose-deep);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    padding: 0.3rem 0.8rem;
+    border-radius: 100px;
+    margin-bottom: 1rem;
+  }
+
+  .modal-desc {
+    font-size: 0.9rem;
+    color: var(--text-mid);
+    line-height: 1.8;
+    margin-bottom: 1.25rem;
+  }
+
+  .modal-price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .modal-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    color: var(--rose-deep);
+    font-weight: 500;
+  }
+
+  .modal-note {
+    font-size: 0.75rem;
+    color: var(--text-soft);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .modal-customize {
+    background: var(--beige);
+    border-radius: var(--radius-sm);
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .modal-customize h4 {
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-mid);
+    margin-bottom: 1rem;
+  }
+
+  .custom-tag {
+    display: inline-block;
+    background: white;
+    color: var(--text-mid);
+    font-size: 0.75rem;
+    padding: 0.35rem 0.8rem;
+    border-radius: 100px;
+    border: 1px solid var(--beige-warm);
+    margin: 0.25rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .custom-tag.selected {
+    background: var(--rose-deep);
+    color: white;
+    border-color: var(--rose-deep);
+  }
+
+  .modal-form input, .modal-form textarea {
+    width: 100%;
+    background: white;
+    border: 1px solid var(--beige-warm);
+    border-radius: var(--radius-sm);
+    padding: 0.75rem 1rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.85rem;
+    color: var(--text-dark);
+    margin-top: 0.6rem;
+    outline: none;
+    transition: border-color 0.2s;
+    resize: vertical;
+  }
+
+  .modal-form input:focus, .modal-form textarea:focus {
+    border-color: var(--rose);
+  }
+
+  .modal-form label {
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    color: var(--text-soft);
+    text-transform: uppercase;
+    display: block;
+    margin-top: 0.75rem;
+  }
+
+  .modal-wa-btn {
+    width: 100%;
+    background: #25D366;
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 100px;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    letter-spacing: 0.04em;
+  }
+
+  .modal-wa-btn:hover { background: #1ebe5a; transform: translateY(-1px); }
+
+  /* ── PERSONALIZAR ── */
+  #personalizar { scroll-margin-top: 64px; }
+
+  .personalize-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .personalize-info h3 {
+    font-size: 1.4rem;
+    color: var(--text-dark);
+    margin-bottom: 0.75rem;
+  }
+
+  .personalize-info p {
+    font-size: 0.9rem;
+    color: var(--text-mid);
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+
+  .step-list {
+    list-style: none;
+    margin-top: 1.5rem;
+  }
+
+  .step-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    margin-bottom: 1.25rem;
+  }
+
+  .step-num {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--rose-light);
+    color: var(--rose-deep);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    font-weight: 500;
+  }
+
+  .step-text strong {
+    display: block;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    margin-bottom: 0.2rem;
+  }
+
+  .step-text span {
+    font-size: 0.82rem;
+    color: var(--text-soft);
+    line-height: 1.6;
+  }
+
+  .personalize-form {
+    background: white;
+    border-radius: var(--radius);
+    padding: 2rem;
+    box-shadow: var(--shadow);
+  }
+
+  .personalize-form h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.4rem;
+    color: var(--text-dark);
+  }
+
+  .personalize-form > p {
+    font-size: 0.82rem;
+    color: var(--text-soft);
+    margin-bottom: 1.5rem;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  .form-group label {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-soft);
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    background: var(--blush);
+    border: 1px solid var(--rose-light);
+    border-radius: var(--radius-sm);
+    padding: 0.75rem 1rem;
+    font-family: 'Jost', sans-serif;
+    font-size: 0.85rem;
+    color: var(--text-dark);
+    outline: none;
+    transition: border-color 0.2s;
+    resize: vertical;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+  .form-group select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23a98c8f' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--rose);
+    background: white;
+  }
+
+  .color-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.4rem;
+  }
+
+  .color-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 100px;
+    border: 1px solid var(--beige-warm);
+    font-size: 0.75rem;
+    color: var(--text-mid);
+    cursor: pointer;
+    transition: all 0.2s;
+    background: white;
+  }
+
+  .color-tag .dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+  }
+
+  .color-tag.selected {
+    border-color: var(--rose-deep);
+    background: var(--rose-light);
+    color: var(--rose-deep);
+  }
+
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  /* ── SOBRE NOSOTROS ── */
+  #nosotros { scroll-margin-top: 64px; }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .about-img-wrap {
+    position: relative;
+  }
+
+  .about-img-main {
+    background: var(--rose-light);
+    border-radius: 32px;
+    aspect-ratio: 4/5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8rem;
+    overflow: hidden;
+  }
+
+  .about-img-float {
+    position: absolute;
+    right: -24px; bottom: 10%;
+    background: white;
+    border-radius: 20px;
+    padding: 1.25rem;
+    box-shadow: var(--shadow);
+    max-width: 200px;
+  }
+
+  .about-img-float p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--text-dark);
+    line-height: 1.5;
+    margin-bottom: 0.4rem;
+  }
+
+  .about-img-float small {
+    font-size: 0.7rem;
+    color: var(--text-soft);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .about-text .section-label { margin-top: 0; }
+
+  .about-text p {
+    font-size: 0.95rem;
+    color: var(--text-mid);
+    line-height: 1.9;
+    margin-bottom: 1rem;
+  }
+
+  .about-values {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .value-card {
+    background: var(--beige);
+    border-radius: var(--radius-sm);
+    padding: 1.25rem;
+  }
+
+  .value-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+
+  .value-card h4 {
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    margin-bottom: 0.25rem;
+    font-weight: 500;
+  }
+
+  .value-card p {
+    font-size: 0.78rem;
+    color: var(--text-soft);
+    line-height: 1.6;
+  }
+
+  /* ── CONTACTO ── */
+  #contacto { scroll-margin-top: 64px; }
+
+  .contact-wrap {
+    background: var(--rose-deep);
+    border-radius: var(--radius);
+    padding: 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact-wrap::before {
+    content: '';
+    position: absolute;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.15);
+    right: -60px; top: -60px;
+  }
+
+  .contact-wrap::after {
+    content: '';
+    position: absolute;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.1);
+    right: 40px; top: 40px;
+  }
+
+  .contact-info { position: relative; z-index: 1; }
+
+  .contact-info h2 {
+    font-size: 2.5rem;
+    color: white;
+    margin-bottom: 1rem;
+  }
+
+  .contact-info p {
+    color: rgba(255,255,255,0.8);
+    font-size: 0.9rem;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+  }
+
+  .contact-details {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .contact-details li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.85);
+  }
+
+  .contact-details li::before {
+    content: "";
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Ccircle cx='12' cy='12' r='4'/%3E%3C/svg%3E") center/10px 10px no-repeat;
+    flex: 0 0 32px;
+  }
+
+  .contact-wa-big {
+    position: relative;
+    z-index: 1;
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .wa-icon-big {
+    width: 64px; height: 64px;
+    background: #25D366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+  }
+
+  .wa-icon-big svg { width: 28px; height: 28px; fill: white; }
+
+  .contact-wa-big h3 {
+    font-size: 1.3rem;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+  }
+
+  .contact-wa-big p {
+    font-size: 0.82rem;
+    color: var(--text-soft);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--text-dark);
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.04em;
+  }
+
+  footer a {
+    color: var(--rose-light);
+    text-decoration: none;
+  }
+
+  /* ── FLOATING WA BUTTON ── */
+  .wa-float {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 999;
+    width: 60px; height: 60px;
+    background: #25D366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+    animation: pulse-wa 3s infinite;
+  }
+
+  .wa-float:hover {
+    transform: scale(1.1);
+    animation: none;
+    box-shadow: 0 6px 28px rgba(37,211,102,0.5);
+  }
+
+  @keyframes pulse-wa {
+    0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.4); }
+    50% { box-shadow: 0 4px 28px rgba(37,211,102,0.6), 0 0 0 8px rgba(37,211,102,0.1); }
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .nav-links.open {
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 64px; left: 0; right: 0;
+      background: var(--cream);
+      border-bottom: 1px solid var(--beige-warm);
+      padding: 1.5rem 2rem;
+      gap: 1.25rem;
+      animation: fadeUp 0.2s ease;
+    }
+    .hamburger { display: flex; }
+    .hero-content { grid-template-columns: 1fr; gap: 2rem; }
+    .hero-image-wrap { display: none; }
+    .hero-title { font-size: 2.8rem; }
+    .trust-bar { gap: 1.5rem; }
+    .about-grid, .personalize-wrap, .contact-wrap { grid-template-columns: 1fr; gap: 2rem; }
+    .contact-wrap { padding: 2rem 1.5rem; }
+    .about-img-float { right: 0; }
+    .about-values { grid-template-columns: 1fr; }
+    .form-grid { grid-template-columns: 1fr; }
+    .catalog-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+    .modal-body { padding: 1.25rem; }
+  }
+
+  .hidden { display: none !important; }
+
+  /* Scroll reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#inicio" class="nav-logo">Rosas Eternas</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#catalogo">Catálogo</a></li>
+    <li><a href="#personalizar">Personalizar</a></li>
+    <li><a href="#nosotros">Nosotras</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+    <li><a href="#" class="nav-wa" id="navWa">Pedir ahora</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="m()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="inicio">
+  <div class="hero-bg"></div>
+  <div class="hero-decor"></div>
+  <div class="hero-content">
+    <div class="hero-text">
+      <div class="hero-badge">✦ Hecho con amor, entregado a tu puerta</div>
+      <h1 class="hero-title">Detalles que <em>enamoran</em> el corazón</h1>
+      <p class="hero-subtitle">Flores en tela &amp; desayunos sorpresa</p>
+      <p class="hero-desc">Creamos momentos inolvidables con ramos artesanales en tela y desayunos sorpresa cargados de amor. Cada detalle está pensado para hacer especial tu ocasión especial.</p>
+      <div class="hero-actions">
+        <a href="#catalogo" class="btn-primary">Ver catálogo ✦</a>
+        <a href="#personalizar" class="btn-outline">Personalizar pedido</a>
+      </div>
+    </div>
+    <div class="hero-image-wrap">
+      <div class="hero-image-card" style="background-image:url('img/hero.jpg'); background-size:cover; background-position:center;"></div>
+      <div class="hero-float-badge one">
+        <div class="float-icon">A</div>
+        <div class="float-text">
+          <strong>100% artesanal</strong>
+          <span>Hecho a mano</span>
+        </div>
+      </div>
+      <div class="hero-float-badge two">
+        <div class="float-icon">D</div>
+        <div class="float-text">
+          <strong>Domicilio</strong>
+          <span>A todo el municipio</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item">
+    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+    Diseños ya disponibles
+  </div>
+  <div class="trust-item">
+    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+    Pedidos por WhatsApp
+  </div>
+  <div class="trust-item">
+    <svg viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 008 20C19 20 22 3 22 3c-1 2-8 2-8 2s9-1 9 3c0 6-7 11-14 11a5.5 5.5 0 01-3-.8"/></svg>
+    Personalización a tu gusto
+  </div>
+  <div class="trust-item">
+    <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+    Domicilio con costo adicional
+  </div>
+</div>
+
+<!-- CATÁLOGO -->
+<section id="catalogo">
+  <div class="reveal">
+    <div class="section-label">✦ Nuestros productos</div>
+    <h2 class="section-title">Nuestro <em>catálogo</em></h2>
+    <p class="section-sub">Explora nuestros diseños disponibles. Cada creación es única y hecha con amor para hacer tu regalo inolvidable.</p>
+  </div>
+
+  <div class="filter-bar reveal">
+    <button class="filter-btn active" onclick="f('todos', this)">Todos</button>
+    <button class="filter-btn" onclick="f('ramos', this)">Ramos en tela</button>
+    <button class="filter-btn" onclick="f('desayunos', this)">Desayunos sorpresa</button>
+    <button class="filter-btn" onclick="f('personalizados', this)">Personalizados</button>
+    <button class="filter-btn" onclick="f('especiales', this)">Ocasiones especiales</button>
+  </div>
+
+  <div class="catalog-grid" id="catalogGrid"></div>
+</section>
+
+<!-- PERSONALIZAR -->
+<section id="personalizar">
+  <div class="reveal" style="margin-bottom: 3rem;">
+    <div class="section-label">✦ A tu medida</div>
+    <h2 class="section-title">Diseña tu <em>detalle perfecto</em></h2>
+    <p class="section-sub">¿Tienes algo especial en mente? Cuéntanos tu idea y la hacemos realidad. Tu pedido se envía directo por WhatsApp.</p>
+  </div>
+
+  <div class="personalize-wrap">
+    <div class="personalize-info reveal">
+      <h3>¿Cómo funciona?</h3>
+      <p>Crear tu detalle personalizado es muy fácil. Solo sigue estos pasos y te contactamos para hacer tu regalo especial realidad.</p>
+      <ul class="step-list">
+        <li class="step-item">
+          <div class="step-num">1</div>
+          <div class="step-text">
+            <strong>Llena el formulario</strong>
+            <span>Cuéntanos qué tienes en mente: tipo de producto, colores, ocasión y presupuesto.</span>
+          </div>
+        </li>
+        <li class="step-item">
+          <div class="step-num">2</div>
+          <div class="step-text">
+            <strong>Envíalo por WhatsApp</strong>
+            <span>Con un clic, toda tu información se envía automáticamente a nuestro chat.</span>
+          </div>
+        </li>
+        <li class="step-item">
+          <div class="step-num">3</div>
+          <div class="step-text">
+            <strong>Recibe una cotización</strong>
+            <span>Te respondemos con opciones, precio y tiempo de entrega para tu pedido.</span>
+          </div>
+        </li>
+        <li class="step-item">
+          <div class="step-num">4</div>
+          <div class="step-text">
+            <strong>¡Tu detalle listo!</strong>
+            <span>Lo elaboramos con amor y lo enviamos a tu puerta. El domicilio tiene costo adicional.</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="personalize-form reveal" id="personalizeForm">
+      <h3>Cuéntanos tu idea ✦</h3>
+      <p>Completa el formulario y se enviará automáticamente por WhatsApp</p>
+
+      <div class="form-group">
+        <label>Tipo de producto</label>
+        <select id="pf-tipo">
+          <option value="">Seleccionar...</option>
+          <option>Ramo en tela</option>
+          <option>Desayuno sorpresa</option>
+          <option>Ramo + Desayuno combo</option>
+          <option>Detalle personalizado</option>
+          <option>Otro</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Ocasión</label>
+        <select id="pf-ocasion">
+          <option value="">Seleccionar...</option>
+          <option>Cumpleaños</option>
+          <option>Aniversario</option>
+          <option>Amor y amistad</option>
+          <option>Día de la madre</option>
+          <option>Día del padre</option>
+          <option>Graduación</option>
+          <option>Sorpresa romántica</option>
+          <option>Celebración familiar</option>
+          <option>Otra ocasión</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Colores deseados</label>
+        <div class="color-tags" id="colorTags">
+          <span class="color-tag" onclick="c(this)" data-color="Rosa">
+            <span class="dot" style="background:#e8b4b8;"></span> Rosa
+          </span>
+          <span class="color-tag" onclick="c(this)" data-color="Lila">
+            <span class="dot" style="background:#d8c5e0;"></span> Lila
+          </span>
+          <span class="color-tag" onclick="c(this)" data-color="Blanco">
+            <span class="dot" style="background:#f0f0f0; border:1px solid #ddd;"></span> Blanco
+          </span>
+          <span class="color-tag" onclick="c(this)" data-color="Rojo">
+            <span class="dot" style="background:#e57373;"></span> Rojo
+          </span>
+          <span class="color-tag" onclick="c(this)" data-color="Naranja">
+            <span class="dot" style="background:#ffb74d;"></span> Naranja
+          </span>
+          <span class="color-tag" onclick="c(this)" data-color="Amarillo">
+            <span class="dot" style="background:#fff176;border:1px solid #ddd;"></span> Amarillo
+          </span>
+          <span class="color-tag" onclick="c(this)" data-color="Azul">
+            <span class="dot" style="background:#90caf9;"></span> Azul
+          </span>
+          <span class="color-tag" onclick="c(this)" data-color="Verde">
+            <span class="dot" style="background:#a5d6a7;"></span> Verde
+          </span>
+          <span class="color-tag" onclick="c(this)" data-color="Beige">
+            <span class="dot" style="background:#f5ede6;border:1px solid #ddd;"></span> Beige
+          </span>
+          <span class="color-tag" onclick="c(this)" data-color="Sorpréndeme">
+            <span class="dot" style="background: conic-gradient(red,yellow,green,blue,red);"></span> Sorpréndeme
+          </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Mensaje o dedicatoria (opcional)</label>
+        <textarea id="pf-mensaje" rows="3" placeholder="Ej: Para mi mamá con mucho amor en su día especial..."></textarea>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Presupuesto aproximado</label>
+          <select id="pf-presupuesto">
+            <option value="">Seleccionar...</option>
+            <option>Hasta $30.000</option>
+            <option>$30.000 - $60.000</option>
+            <option>$60.000 - $100.000</option>
+            <option>$100.000 - $150.000</option>
+            <option>Más de $150.000</option>
+            <option>Lo defino con ustedes</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>¿Cuándo lo necesitas?</label>
+          <input type="date" id="pf-fecha">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Detalles adicionales</label>
+        <textarea id="pf-detalles" rows="2" placeholder="Algo más que quieras contarnos..."></textarea>
+      </div>
+
+      <button class="btn-primary" style="width:100%;margin-top:0.5rem;justify-content:center;" onclick="p()">
+        Enviar por WhatsApp
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE NOSOTROS -->
+<section id="nosotros" style="background: linear-gradient(135deg, var(--beige) 0%, var(--lila-soft) 100%); max-width: 100%; border-radius: 0;">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <div class="about-grid">
+      <div class="about-img-wrap reveal">
+        <div class="about-img-main" style="background-image:url('img/about.jpg'); background-size:cover; background-position:center;"></div>
+        <div class="about-img-float">
+          <p>"Cada flor, una historia de amor"</p>
+          <small>Fundado con pasión</small>
+        </div>
+      </div>
+      <div class="about-text reveal">
+        <div class="section-label">✦ Nuestra historia</div>
+        <h2 class="section-title">Hechos con <em>amor</em> desde el corazón</h2>
+        <p>Somos un emprendimiento que nació del amor por los detalles y la creatividad. Cada ramo de flores en tela y cada desayuno sorpresa es elaborado con dedicación para convertir momentos ordinarios en recuerdos extraordinarios.</p>
+        <p>No tenemos tienda física — trabajamos por pedido y domicilio, para que tus regalos lleguen directamente a quien más quieres, sin importar la ocasión.</p>
+        <p>Creemos que un regalo hecho a mano lleva un pedacito del alma. Por eso, cada creación es única y especial.</p>
+        <div class="about-values">
+          <div class="value-card">
+            <div class="value-icon">A</div>
+            <h4>Artesanal</h4>
+            <p>Cada pieza elaborada a mano con materiales de calidad.</p>
+          </div>
+          <div class="value-card">
+            <div class="value-icon">C</div>
+            <h4>Con amor</h4>
+            <p>Ponemos el corazón en cada detalle para sorprender.</p>
+          </div>
+          <div class="value-card">
+            <div class="value-icon">P</div>
+            <h4>Personalizado</h4>
+            <p>Adaptamos cada diseño a tu gusto y ocasión.</p>
+          </div>
+          <div class="value-card">
+            <div class="value-icon">D</div>
+            <h4>A domicilio</h4>
+            <p>Entregamos con cariño, el domicilio tiene costo adicional.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="contact-wrap reveal">
+    <div class="contact-info">
+      <h2>Hablemos y creamos tu regalo ideal</h2>
+      <p>Todos los pedidos se realizan directamente por WhatsApp. No tenemos punto de venta físico — todo funciona por pedido y domicilio con costo adicional.</p>
+      <ul class="contact-details">
+        <li>Pedidos 100% por WhatsApp</li>
+        <li>Sin tienda física — todo a domicilio</li>
+        <li>Domicilio con costo adicional</li>
+        <li>Respondemos en pocas horas</li>
+        <li>Diseños listos y personalizados</li>
+      </ul>
+    </div>
+    <div class="contact-wa-big reveal">
+      <div class="wa-icon-big">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+          <path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.557 4.118 1.527 5.847L0 24l6.335-1.509A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.007-1.368l-.36-.214-3.729.978.995-3.645-.235-.374A9.82 9.82 0 012.182 12 9.818 9.818 0 0112 2.182 9.818 9.818 0 0121.818 12 9.818 9.818 0 0112 21.818z"/>
+        </svg>
+      </div>
+      <h3>¿Lista para sorprender?</h3>
+      <p>Escríbenos ahora y te ayudamos a elegir o crear el regalo perfecto para tu ocasión especial.</p>
+      <a href="#" id="contactWaBtn" class="btn-primary" style="width:100%; justify-content:center; text-decoration:none; background:#25D366;">
+        Escribir por WhatsApp
+      </a>
+      <p style="font-size:0.72rem; color:var(--text-soft); margin-top:1rem;">
+        También puedes usar el botón verde flotante en cualquier momento ✦
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p style="font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-style:italic; color:var(--rose-light); margin-bottom:0.5rem;">Rosas Eternas</p>
+  <p>Porque el amor no se marchita — Detalles hechos con amor para momentos especiales ✦</p>
+  <p style="margin-top:0.5rem;">Pedidos por WhatsApp · Sin tienda física · Domicilio con costo adicional</p>
+</footer>
+
+<!-- FLOATING WA -->
+<a href="#" id="waFloat" class="wa-float" title="Escribir por WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.557 4.118 1.527 5.847L0 24l6.335-1.509A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.007-1.368l-.36-.214-3.729.978.995-3.645-.235-.374A9.82 9.82 0 012.182 12 9.818 9.818 0 0112 2.182 9.818 9.818 0 0121.818 12 9.818 9.818 0 0112 21.818z"/>
+  </svg>
+</a>
+
+<!-- PRODUCT DETAIL MODAL -->
+<div class="modal-overlay" id="productModal" onclick="x(event)">
+  <div class="modal" id="modalContent">
+    <button class="modal-close" onclick="x()">✕</button>
+    <div class="modal-img" id="modalImg"></div>
+    <div class="modal-body">
+      <div class="modal-cat" id="modalCat"></div>
+      <h2 class="modal-title" id="modalTitle"></h2>
+      <div class="modal-occasion-pill" id="modalOccasion"></div>
+      <p class="modal-desc" id="modalDesc"></p>
+      <div class="modal-price-row">
+        <div class="modal-price" id="modalPrice"></div>
+      </div>
+      <p class="modal-note">
+        ⚠️ El costo del domicilio es adicional al precio del producto.
+      </p>
+      <div class="modal-customize">
+        <h4>¿Cómo quieres tu pedido?</h4>
+        <div>
+          <span class="custom-tag selected" id="tag-existing" onclick="s('existing')">Diseño existente</span>
+          <span class="custom-tag" id="tag-custom" onclick="s('custom')">Quiero personalizarlo</span>
+        </div>
+        <div class="modal-form" id="modalCustomForm" style="margin-top:1rem; display:none;">
+          <label>Color o detalle especial</label>
+          <input type="text" id="modal-color" placeholder="Ej: rosa y lila, con lazo dorado...">
+          <label>Mensaje o dedicatoria</label>
+          <textarea id="modal-message" rows="2" placeholder="Ej: Para mi mamá con amor..."></textarea>
+        </div>
+      </div>
+      <button class="modal-wa-btn" id="modalWaBtn" onclick="w()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+          <path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.557 4.118 1.527 5.847L0 24l6.335-1.509A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.007-1.368l-.36-.214-3.729.978.995-3.645-.235-.374A9.82 9.82 0 012.182 12 9.818 9.818 0 0112 2.182 9.818 9.818 0 0121.818 12 9.818 9.818 0 0112 21.818z"/>
+        </svg>
+        Lo quiero — Pedir por WhatsApp
+      </button>
+    </div>
+  </div>
+</div>
+<script>
+const n = '573016356319';
+const d = [
+  { id: 1, name: 'Ramo primaveral rosa', image: 'img/Ramo1.jpeg', category: 'ramos', price: 'Desde $45.000', occasion: 'Cumpleanos', desc: 'Ramo artesanal en tela con tonos suaves y acabado delicado.', descFull: 'Ramo elaborado a mano con flores en tela y detalles decorativos. Es una opcion duradera para fechas especiales y mensajes de afecto.' },
+  { id: 2, name: 'Desayuno romantico en caja', image: 'img/Ramo1_2.jpeg', category: 'desayunos', price: 'Desde $80.000', occasion: 'Aniversario', desc: 'Caja decorada con desayuno sorpresa y presentacion especial.', descFull: 'Incluye seleccion de productos de desayuno y decoracion segun la ocasion. Se prepara por pedido para entregar una sorpresa memorable.' },
+  { id: 3, name: 'Ramo tonos pastel', image: 'img/Ramo3.jpeg', category: 'ramos', price: 'Desde $55.000', occasion: 'Dia de la madre', desc: 'Ramo de estilo suave con combinacion de tonos pastel.', descFull: 'Composicion floral artesanal en tonos pastel, pensada para obsequios elegantes y delicados en celebraciones familiares.' },
+  { id: 4, name: 'Desayuno cumpleanero', image: 'img/Ramo2_1.jpeg', category: 'desayunos', price: 'Desde $70.000', occasion: 'Cumpleanos', desc: 'Desayuno con decoracion festiva y enfoque de celebracion.', descFull: 'Propuesta de desayuno especial para cumpleanos con presentacion tematica y opcion de dedicatoria personalizada.' },
+  { id: 5, name: 'Ramo eterno rojo pasion', image: 'img/DiaHombre1.jpeg', category: 'especiales', price: 'Desde $65.000', occasion: 'San Valentin', desc: 'Ramo de tonos rojos para fechas romanticas.', descFull: 'Arreglo en tonos rojos con estilo clasico, ideal para celebraciones romanticas y detalles significativos.' },
+  { id: 6, name: 'Cumpleaños sencillo', image: 'img/CumpleHombre1.jpeg', category: 'personalizados', price: 'Desde $110.000', occasion: 'Todas las ocasiones', desc: 'Ramo y desayuno en una presentacion integral.', descFull: 'Combinacion de ramo artesanal y desayuno sorpresa para una experiencia completa. Se ajusta segun disponibilidad y ocasion.' }
+];
+let q = null;
+let t = 'existing';
+const l = (z) => `https://wa.me/${n}?text=${encodeURIComponent(z)}`;
+const h = (z) => window.open(l(z), '_blank', 'noopener');
+const e = (k) => ({ ramos: 'Ramos en tela', desayunos: 'Desayunos', personalizados: 'Personalizado', especiales: 'Ocasion especial' }[k] || k);
+function v(k = 'todos') {
+  const g = document.getElementById('catalogGrid');
+  const r = k === 'todos' ? d : d.filter((x) => x.category === k);
+  if (!r.length) {
+    g.innerHTML = '<p style="color:var(--text-soft);grid-column:1/-1;text-align:center;padding:2rem;">No hay productos en esta categoria aun.</p>';
+    return;
+  }
+  g.innerHTML = r.map((x) => `<div class="product-card" onclick="o(${x.id})"><div class="card-img" style="background-image:url('${x.image}');background-size:cover;background-position:center;"><div class="card-cat-badge">${e(x.category)}</div><div class="card-occasion">${x.occasion}</div></div><div class="card-body"><div class="card-name">${x.name}</div><div class="card-desc">${x.desc}</div><div class="card-footer"><div class="card-price">${x.price}<small>+ domicilio adicional</small></div><button class="card-wa-btn" onclick="event.stopPropagation();j(${x.id})">Lo quiero</button></div></div></div>`).join('');
+}
+function f(k, b) { document.querySelectorAll('.filter-btn').forEach((x) => x.classList.remove('active')); b.classList.add('active'); v(k); }
+function o(id) {
+  const x = d.find((r) => r.id === id);
+  if (!x) return;
+  q = x;
+  const i = document.getElementById('modalImg');
+  i.style.backgroundImage = `url('${x.image}')`;
+  i.style.backgroundSize = 'cover';
+  i.style.backgroundPosition = 'center';
+  document.getElementById('modalCat').textContent = e(x.category);
+  document.getElementById('modalTitle').textContent = x.name;
+  document.getElementById('modalOccasion').textContent = x.occasion;
+  document.getElementById('modalDesc').textContent = x.descFull || x.desc;
+  document.getElementById('modalPrice').textContent = x.price;
+  t = 'existing';
+  document.getElementById('tag-existing').classList.add('selected');
+  document.getElementById('tag-custom').classList.remove('selected');
+  document.getElementById('modalCustomForm').style.display = 'none';
+  document.getElementById('modal-color').value = '';
+  document.getElementById('modal-message').value = '';
+  document.getElementById('productModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function x(a) {
+  if (!a || a.target === document.getElementById('productModal') || a.type === 'click') {
+    document.getElementById('productModal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+}
+function s(u) {
+  t = u;
+  document.getElementById('tag-existing').classList.toggle('selected', u === 'existing');
+  document.getElementById('tag-custom').classList.toggle('selected', u === 'custom');
+  document.getElementById('modalCustomForm').style.display = u === 'custom' ? 'block' : 'none';
+}
+function w() {
+  if (!q) return;
+  const c1 = document.getElementById('modal-color').value.trim();
+  const c2 = document.getElementById('modal-message').value.trim();
+  const tp = t === 'existing' ? 'Diseno existente' : 'Personalizado';
+  let z = 'Hola, vi este producto en la web y me interesa.\n\n';
+  z += `*Producto:* ${q.name}\n*Categoria:* ${e(q.category)}\n*Precio base:* ${q.price}\n*Tipo de pedido:* ${tp}\n*Ocasion:* ${q.occasion}\n`;
+  if (c1) z += `*Color / detalles:* ${c1}\n`;
+  if (c2) z += `*Mensaje o dedicatoria:* ${c2}\n`;
+  z += '\nPodemos coordinar el pedido?';
+  h(z);
+}
+function j(id) {
+  const x1 = d.find((r) => r.id === id);
+  if (!x1) return;
+  h(`Hola, vi este producto en la web.\n\n*Producto:* ${x1.name}\n*Precio base:* ${x1.price}\n\nMe compartes mas informacion?`);
+}
+function c(el) { el.classList.toggle('selected'); }
+function p() {
+  const t1 = document.getElementById('pf-tipo').value;
+  const t2 = document.getElementById('pf-ocasion').value;
+  const t3 = document.getElementById('pf-mensaje').value;
+  const t4 = document.getElementById('pf-presupuesto').value;
+  const t5 = document.getElementById('pf-fecha').value;
+  const t6 = document.getElementById('pf-detalles').value;
+  const cs = [...document.querySelectorAll('.color-tag.selected')].map((r) => r.dataset.color).join(', ');
+  if (!t1 && !t2) {
+    alert('Selecciona al menos el tipo de producto y la ocasion.');
+    return;
+  }
+  let z = 'Hola, quiero hacer un pedido personalizado.\n\n';
+  if (t1) z += `*Tipo de producto:* ${t1}\n`;
+  if (t2) z += `*Ocasion:* ${t2}\n`;
+  if (cs) z += `*Colores deseados:* ${cs}\n`;
+  if (t3) z += `*Mensaje/dedicatoria:* ${t3}\n`;
+  if (t4) z += `*Presupuesto aproximado:* ${t4}\n`;
+  if (t5) z += `*Lo necesito para:* ${t5}\n`;
+  if (t6) z += `*Detalles adicionales:* ${t6}\n`;
+  z += '\nPodrian ayudarme con mi pedido?';
+  h(z);
+}
+function m() { document.getElementById('navLinks').classList.toggle('open'); }
+function a() {
+  const z = 'Hola, visite su web y me gustaria recibir informacion sobre sus productos.';
+  document.getElementById('waFloat').href = l(z);
+  document.getElementById('navWa').href = l(z);
+  document.getElementById('contactWaBtn').href = l(z);
+}
+function r() {
+  const io = new IntersectionObserver((xs) => {
+    xs.forEach((u) => {
+      if (u.isIntersecting) {
+        u.target.classList.add('visible');
+        io.unobserve(u.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+}
+function b() {
+  document.addEventListener('contextmenu', (ev) => {
+    if (ev.target.closest('.card-img, .modal-img')) ev.preventDefault();
+  });
+  document.addEventListener('dragstart', (ev) => {
+    if (ev.target.closest('.card-img, .modal-img')) ev.preventDefault();
+  });
+}
+window.addEventListener('DOMContentLoaded', () => { v(); a(); r(); b(); });
+</script>
+</body>
+</html>
