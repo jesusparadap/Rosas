@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pétalos & Detalles — Flores artesanales y desayunos sorpresa</title>
+<title>Rosas Eternas — Flores artesanales y desayunos sorpresa</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -410,12 +410,20 @@
 
   .card-img {
     aspect-ratio: 4/3;
+    width: 100%;
+    max-height: 220px;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     overflow: hidden;
+    background-color: #fff;
     background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    background-origin: content-box;
+    padding: clamp(0.65rem, 5vw, 1.15rem);
+    box-sizing: border-box;
     user-select: none;
     -webkit-user-drag: none;
   }
@@ -560,7 +568,13 @@
     justify-content: center;
     border-radius: var(--radius) var(--radius) 0 0;
     overflow: hidden;
+    background-color: #fff;
     background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    background-origin: content-box;
+    padding: clamp(0.75rem, 4vw, 1.5rem);
+    box-sizing: border-box;
     user-select: none;
     -webkit-user-drag: none;
   }
@@ -883,7 +897,10 @@
   }
 
   .about-img-main {
-    background: var(--rose-light);
+    background-color: #fff;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
     border-radius: 32px;
     aspect-ratio: 4/5;
     display: flex;
@@ -891,6 +908,12 @@
     justify-content: center;
     font-size: 8rem;
     overflow: hidden;
+    padding: clamp(0.35rem, 2%, 1rem);
+    box-sizing: border-box;
+    background-origin: content-box;
+    box-shadow:
+      0 4px 12px rgba(61, 44, 46, 0.08),
+      0 16px 40px rgba(61, 44, 46, 0.12);
   }
 
   .about-img-float {
@@ -899,7 +922,11 @@
     background: white;
     border-radius: 20px;
     padding: 1.25rem;
-    box-shadow: var(--shadow);
+    z-index: 1;
+    box-shadow:
+      0 2px 6px rgba(61, 44, 46, 0.06),
+      0 8px 24px rgba(61, 44, 46, 0.12),
+      0 20px 48px rgba(61, 44, 46, 0.14);
     max-width: 200px;
   }
 
@@ -1188,7 +1215,7 @@
       </div>
     </div>
     <div class="hero-image-wrap">
-      <div class="hero-image-card" style="background-image:url('img/hero.jpg'); background-size:cover; background-position:center;"></div>
+      <div class="hero-image-card" style="background-image:url('img/logo2.jpg'); background-size:cover; background-position:center;"></div>
       <div class="hero-float-badge one">
         <div class="float-icon">A</div>
         <div class="float-text">
@@ -1200,7 +1227,7 @@
         <div class="float-icon">D</div>
         <div class="float-text">
           <strong>Domicilio</strong>
-          <span>A todo el municipio</span>
+          <span>A Barranquilla, Soledad y Puerto Colombia</span>
         </div>
       </div>
     </div>
@@ -1399,7 +1426,7 @@
   <div style="max-width: 1200px; margin: 0 auto;">
     <div class="about-grid">
       <div class="about-img-wrap reveal">
-        <div class="about-img-main" style="background-image:url('img/about.jpg'); background-size:cover; background-position:center;"></div>
+        <div class="about-img-main" style="background-image:url('img/logo1.jpeg');"></div>
         <div class="about-img-float">
           <p>"Cada flor, una historia de amor"</p>
           <small>Fundado con pasión</small>
@@ -1528,12 +1555,56 @@
 <script>
 const n = '573016356319';
 const d = [
-  { id: 1, name: 'Ramo primaveral rosa', image: 'img/Ramo1.jpeg', category: 'ramos', price: 'Desde $45.000', occasion: 'Cumpleanos', desc: 'Ramo artesanal en tela con tonos suaves y acabado delicado.', descFull: 'Ramo elaborado a mano con flores en tela y detalles decorativos. Es una opcion duradera para fechas especiales y mensajes de afecto.' },
-  { id: 2, name: 'Desayuno romantico en caja', image: 'img/Ramo1_2.jpeg', category: 'desayunos', price: 'Desde $80.000', occasion: 'Aniversario', desc: 'Caja decorada con desayuno sorpresa y presentacion especial.', descFull: 'Incluye seleccion de productos de desayuno y decoracion segun la ocasion. Se prepara por pedido para entregar una sorpresa memorable.' },
-  { id: 3, name: 'Ramo tonos pastel', image: 'img/Ramo3.jpeg', category: 'ramos', price: 'Desde $55.000', occasion: 'Dia de la madre', desc: 'Ramo de estilo suave con combinacion de tonos pastel.', descFull: 'Composicion floral artesanal en tonos pastel, pensada para obsequios elegantes y delicados en celebraciones familiares.' },
-  { id: 4, name: 'Desayuno cumpleanero', image: 'img/Ramo2_1.jpeg', category: 'desayunos', price: 'Desde $70.000', occasion: 'Cumpleanos', desc: 'Desayuno con decoracion festiva y enfoque de celebracion.', descFull: 'Propuesta de desayuno especial para cumpleanos con presentacion tematica y opcion de dedicatoria personalizada.' },
-  { id: 5, name: 'Ramo eterno rojo pasion', image: 'img/DiaHombre1.jpeg', category: 'especiales', price: 'Desde $65.000', occasion: 'San Valentin', desc: 'Ramo de tonos rojos para fechas romanticas.', descFull: 'Arreglo en tonos rojos con estilo clasico, ideal para celebraciones romanticas y detalles significativos.' },
-  { id: 6, name: 'Cumpleaños sencillo', image: 'img/CumpleHombre1.jpeg', category: 'personalizados', price: 'Desde $110.000', occasion: 'Todas las ocasiones', desc: 'Ramo y desayuno en una presentacion integral.', descFull: 'Combinacion de ramo artesanal y desayuno sorpresa para una experiencia completa. Se ajusta segun disponibilidad y ocasion.' }
+  {
+    id: 1,
+    name: 'Caja detalle azul',
+    image: 'img/caja-detalle-azul.jpg',
+    category: 'especiales',
+    price: 'Desde $45.000',
+    occasion: 'Dia del hombre',
+    desc: 'Caja decorativa con flores en tela azules, chocolates y bebidas en presentacion elegante.',
+    descFull: 'Detalle artesanal en caja de madera con flores en tela en tonos azules, chocolates y bebidas. Ideal para regalos masculinos, fechas especiales y celebraciones sencillas con un toque elegante.'
+  },
+  {
+    id: 2,
+    name: 'Desayuno romantico con ramo rojo',
+    image: 'img/desayuno-romantico-rojo.jpg',
+    category: 'desayunos',
+    price: 'Desde $80.000',
+    occasion: 'Aniversario',
+    desc: 'Desayuno sorpresa con decoracion romantica, globo y ramo rojo en tela.',
+    descFull: 'Desayuno sorpresa presentado en bandeja decorada con globos, lazo y ramo artesanal en tela color rojo. Ideal para aniversarios, celebraciones romanticas y detalles especiales con entrega a domicilio.'
+  },
+  {
+    id: 3,
+    name: 'Detalle rosa con bouquet floral',
+    image: 'img/detalle-rosa-globo.jpg',
+    category: 'especiales',
+    price: 'Desde $55.000',
+    occasion: 'Dia de la madre',
+    desc: 'Caja decorativa en tonos rosados con globo, mug y ramo floral delicado.',
+    descFull: 'Detalle decorativo en caja de madera con acabados rosados, globo metalizado, mug personalizado y bouquet floral artesanal. Ideal para sorprender en fechas especiales como Dia de la madre, cumpleanos o celebraciones femeninas.'
+  },
+  {
+    id: 4,
+    name: 'Ramo rosa tonos pastel',
+    image: 'img/ramo-rosa-pastel.jpg',
+    category: 'ramos',
+    price: 'Desde $35.000',
+    occasion: 'Cumpleanos',
+    desc: 'Ramo artesanal en tela color rosa pastel con acabado delicado y decoracion elegante.',
+    descFull: 'Bouquet elaborado a mano con rosas en tela color rosa pastel, detalles decorativos y envoltura delicada. Perfecto para cumpleanos, detalles tiernos y celebraciones especiales.'
+  },
+  {
+    id: 5,
+    name: 'Bouquet rojo eterno',
+    image: 'img/ramo-rojo-eterno.jpg',
+    category: 'ramos',
+    price: 'Desde $65.000',
+    occasion: 'San Valentin',
+    desc: 'Ramo de rosas rojas en tela con estilo romantico y presentacion llamativa.',
+    descFull: 'Bouquet artesanal de rosas rojas en tela con envoltura decorativa y acabado romantico. Ideal para San Valentin, aniversarios y detalles de amor duraderos.'
+  }
 ];
 let q = null;
 let t = 'existing';
@@ -1547,7 +1618,7 @@ function v(k = 'todos') {
     g.innerHTML = '<p style="color:var(--text-soft);grid-column:1/-1;text-align:center;padding:2rem;">No hay productos en esta categoria aun.</p>';
     return;
   }
-  g.innerHTML = r.map((x) => `<div class="product-card" onclick="o(${x.id})"><div class="card-img" style="background-image:url('${x.image}');background-size:cover;background-position:center;"><div class="card-cat-badge">${e(x.category)}</div><div class="card-occasion">${x.occasion}</div></div><div class="card-body"><div class="card-name">${x.name}</div><div class="card-desc">${x.desc}</div><div class="card-footer"><div class="card-price">${x.price}<small>+ domicilio adicional</small></div><button class="card-wa-btn" onclick="event.stopPropagation();j(${x.id})">Lo quiero</button></div></div></div>`).join('');
+  g.innerHTML = r.map((x) => `<div class="product-card" onclick="o(${x.id})"><div class="card-img" style="background-image:url('${x.image}');"><div class="card-cat-badge">${e(x.category)}</div><div class="card-occasion">${x.occasion}</div></div><div class="card-body"><div class="card-name">${x.name}</div><div class="card-desc">${x.desc}</div><div class="card-footer"><div class="card-price">${x.price}<small>+ domicilio adicional</small></div><button class="card-wa-btn" onclick="event.stopPropagation();j(${x.id})">Lo quiero</button></div></div></div>`).join('');
 }
 function f(k, b) { document.querySelectorAll('.filter-btn').forEach((x) => x.classList.remove('active')); b.classList.add('active'); v(k); }
 function o(id) {
@@ -1556,7 +1627,7 @@ function o(id) {
   q = x;
   const i = document.getElementById('modalImg');
   i.style.backgroundImage = `url('${x.image}')`;
-  i.style.backgroundSize = 'cover';
+  i.style.backgroundSize = 'contain';
   i.style.backgroundPosition = 'center';
   document.getElementById('modalCat').textContent = e(x.category);
   document.getElementById('modalTitle').textContent = x.name;
