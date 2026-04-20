@@ -581,6 +581,7 @@
     box-sizing: border-box;
     user-select: none;
     -webkit-user-drag: none;
+    cursor: zoom-in;
   }
 
   .modal-thumbs {
@@ -616,6 +617,53 @@
   .modal-thumb.active {
     border-color: var(--rose-deep);
     opacity: 1;
+  }
+
+  .image-zoom-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 3000;
+    background: rgba(0, 0, 0, 0.82);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1.25rem;
+  }
+
+  .image-zoom-overlay.open { display: flex; }
+
+  .image-zoom-content {
+    position: relative;
+    max-width: min(95vw, 1200px);
+    max-height: 90vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .image-zoom-img {
+    width: 100%;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: var(--radius-sm);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.35);
+    background: #fff;
+  }
+
+  .image-zoom-close {
+    position: absolute;
+    top: -0.75rem;
+    right: -0.75rem;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: #fff;
+    color: #222;
+    font-size: 1.15rem;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
   }
 
   .modal-body {
@@ -1595,6 +1643,13 @@
     </div>
   </div>
 </div>
+
+<div class="image-zoom-overlay" id="imageZoom" onclick="cz(event)">
+  <div class="image-zoom-content">
+    <button class="image-zoom-close" type="button" onclick="cz()">✕</button>
+    <img id="imageZoomImg" class="image-zoom-img" src="" alt="Vista ampliada del producto">
+  </div>
+</div>
 <script>
 const n = '573016356319';
 const d = [
@@ -1621,7 +1676,7 @@ const d = [
     occasion: 'Quinceañera',
     desc: 'Diseño elegante y delicado elaborado con rosas artesanales en cinta satinada. Perfecto para una quinceañera sofisticada y moderna.',
     descFull: `Diseño elegante y delicado elaborado con rosas artesanales en cinta satinada. Perfecto para una quinceañera sofisticada y moderna.
-    🌹 Incluye24 rosas artesanales  
+    🌹 Incluye 24 rosas artesanales  
     🎀 Colores personalizables`,
     images: ['img/2/ramo_encanto_1.jpeg', 'img/2/ramo_encanto_2.jpeg', 'img/2/ramo_encanto_3.jpeg', 'img/2/ramo_encanto_4.jpeg']
   },
@@ -1634,7 +1689,7 @@ const d = [
     occasion: 'Amor y regalo',
     desc: 'Caja sorpresa premium con osito, chocolates y rosas artesanales.',
     descFull: `Caja sorpresa premium con osito, chocolates y rosas artesanales.
-    🌹 Incluye5 rosas
+    🌹 Incluye 5 rosas
     🎀 Colores personalizables.`,
     images: ['img/3/golden_love.jpeg']
   },
@@ -1852,6 +1907,7 @@ const d = [
 let q = null;
 let t = 'existing';
 let modalImages = [];
+let currentModalImage = '';
 function formatDescBody(s) {
   if (s == null || s === '') return '';
   return String(s)
@@ -1878,8 +1934,25 @@ function f(k, b) { document.querySelectorAll('.filter-btn').forEach((x) => x.cla
 function g(idx) {
   if (!modalImages.length || idx < 0 || idx >= modalImages.length) return;
   const i = document.getElementById('modalImg');
-  i.style.backgroundImage = `url('${modalImages[idx]}')`;
+  const src = modalImages[idx];
+  i.style.backgroundImage = `url('${src}')`;
+  currentModalImage = src;
   document.querySelectorAll('#modalThumbs .modal-thumb').forEach((btn, j) => btn.classList.toggle('active', j === idx));
+}
+function z(ev) {
+  if (ev) ev.stopPropagation();
+  if (!currentModalImage) return;
+  const overlay = document.getElementById('imageZoom');
+  const img = document.getElementById('imageZoomImg');
+  img.src = currentModalImage;
+  overlay.classList.add('open');
+}
+function cz(ev) {
+  const overlay = document.getElementById('imageZoom');
+  if (!ev || ev.target === overlay) {
+    overlay.classList.remove('open');
+    document.getElementById('imageZoomImg').src = '';
+  }
 }
 function o(id) {
   const x = d.find((r) => r.id === id);
@@ -1895,9 +1968,9 @@ function o(id) {
     thumbs.innerHTML = '';
   }
   const i = document.getElementById('modalImg');
-  i.style.backgroundImage = `url('${modalImages[0]}')`;
   i.style.backgroundSize = 'contain';
   i.style.backgroundPosition = 'center';
+  g(0);
   document.getElementById('modalCat').textContent = e(x.category);
   document.getElementById('modalTitle').textContent = x.name;
   document.getElementById('modalOccasion').textContent = x.occasion;
@@ -1913,6 +1986,7 @@ function o(id) {
   document.body.style.overflow = 'hidden';
 }
 function x(a) {
+  cz();
   const overlay = document.getElementById('productModal');
   if (!a) {
     overlay.classList.remove('open');
@@ -1997,7 +2071,20 @@ function b() {
     if (ev.target.closest('.card-img, .modal-img, .modal-thumb')) ev.preventDefault();
   });
 }
-window.addEventListener('DOMContentLoaded', () => { v(); a(); r(); b(); });
+window.addEventListener('DOMContentLoaded', () => {
+  const modalImg = document.getElementById('modalImg');
+  if (modalImg) modalImg.addEventListener('click', z);
+  document.addEventListener('keydown', (ev) => {
+    if (ev.key === 'Escape') {
+      if (document.getElementById('imageZoom').classList.contains('open')) {
+        cz();
+      } else {
+        x();
+      }
+    }
+  });
+  v(); a(); r(); b();
+});
 </script>
 </body>
 </html>
