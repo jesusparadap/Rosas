@@ -561,13 +561,17 @@
 
   .modal-close:hover { background: var(--rose-light); color: var(--rose-deep); }
 
+  .modal-visual {
+    background: #fff;
+    border-radius: var(--radius) var(--radius) 0 0;
+    overflow: hidden;
+  }
+
   .modal-img {
     aspect-ratio: 16/9;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: var(--radius) var(--radius) 0 0;
-    overflow: hidden;
     background-color: #fff;
     background-repeat: no-repeat;
     background-position: center;
@@ -577,6 +581,41 @@
     box-sizing: border-box;
     user-select: none;
     -webkit-user-drag: none;
+  }
+
+  .modal-thumbs {
+    display: flex;
+    gap: 0.45rem;
+    padding: 0.5rem 0.75rem 0.75rem;
+    flex-wrap: nowrap;
+    justify-content: center;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-top: 1px solid var(--beige-warm);
+  }
+
+  .modal-thumbs[hidden] { display: none !important; }
+
+  .modal-thumb {
+    flex: 0 0 auto;
+    width: 52px;
+    height: 52px;
+    border-radius: var(--radius-sm);
+    border: 2px solid transparent;
+    padding: 0;
+    cursor: pointer;
+    background-size: cover;
+    background-position: center;
+    background-color: var(--beige);
+    opacity: 0.65;
+    transition: border-color 0.2s, opacity 0.2s;
+  }
+
+  .modal-thumb:hover { opacity: 0.95; }
+
+  .modal-thumb.active {
+    border-color: var(--rose-deep);
+    opacity: 1;
   }
 
   .modal-body {
@@ -613,6 +652,7 @@
     color: var(--text-mid);
     line-height: 1.8;
     margin-bottom: 1.25rem;
+    white-space: pre-line;
   }
 
   .modal-price-row {
@@ -1436,7 +1476,7 @@
         <div class="section-label">✦ Nuestra historia</div>
         <h2 class="section-title">Hechos con <em>amor</em> desde el corazón</h2>
         <p>Somos un emprendimiento que nació del amor por los detalles y la creatividad. Cada ramo de flores en tela y cada desayuno sorpresa es elaborado con dedicación para convertir momentos ordinarios en recuerdos extraordinarios.</p>
-        <p>No tenemos tienda física — trabajamos por pedido y domicilio, para que tus regalos lleguen directamente a quien más quieres, sin importar la ocasión.</p>
+        <p>Tienda física en Conjunto Residencial Ceiba (Soledad) — trabajamos por pedido y domicilio, para que tus regalos lleguen directamente a quien más quieres, sin importar la ocasión.</p>
         <p>Creemos que un regalo hecho a mano lleva un pedacito del alma. Por eso, cada creación es única y especial.</p>
         <div class="about-values">
           <div class="value-card">
@@ -1473,7 +1513,7 @@
       <p>Todos los pedidos se realizan directamente por WhatsApp. No tenemos punto de venta físico — todo funciona por pedido y domicilio con costo adicional.</p>
       <ul class="contact-details">
         <li>Pedidos 100% por WhatsApp</li>
-        <li>Sin tienda física — todo a domicilio</li>
+        <li>Tienda física Conjunto Residencial Ceiba — servicio a domicilio</li>
         <li>Domicilio con costo adicional</li>
         <li>Respondemos en pocas horas</li>
         <li>Diseños listos y personalizados</li>
@@ -1502,7 +1542,7 @@
 <footer>
   <p style="font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-style:italic; color:var(--rose-light); margin-bottom:0.5rem;">Rosas Eternas</p>
   <p>Porque el amor no se marchita — Detalles hechos con amor para momentos especiales ✦</p>
-  <p style="margin-top:0.5rem;">Pedidos por WhatsApp · Sin tienda física · Domicilio con costo adicional</p>
+  <p style="margin-top:0.5rem;">Pedidos por WhatsApp · Tienda física en Conjunto Residencial Ceiba (Soledad) · Domicilio con costo adicional</p>
 </footer>
 
 <!-- FLOATING WA -->
@@ -1517,7 +1557,10 @@
 <div class="modal-overlay" id="productModal" onclick="x(event)">
   <div class="modal" id="modalContent">
     <button class="modal-close" onclick="x()">✕</button>
-    <div class="modal-img" id="modalImg"></div>
+    <div class="modal-visual">
+      <div class="modal-img" id="modalImg"></div>
+      <div class="modal-thumbs" id="modalThumbs" hidden></div>
+    </div>
     <div class="modal-body">
       <div class="modal-cat" id="modalCat"></div>
       <h2 class="modal-title" id="modalTitle"></h2>
@@ -1557,57 +1600,263 @@ const n = '573016356319';
 const d = [
   {
     id: 1,
-    name: 'Caja detalle azul',
-    image: 'img/caja-detalle-azul.jpg',
-    category: 'especiales',
-    price: 'Desde $45.000',
-    occasion: 'Dia del hombre',
-    desc: 'Caja decorativa con flores en tela azules, chocolates y bebidas en presentacion elegante.',
-    descFull: 'Detalle artesanal en caja de madera con flores en tela en tonos azules, chocolates y bebidas. Ideal para regalos masculinos, fechas especiales y celebraciones sencillas con un toque elegante.'
+    name: '👑 Ramo Princesa',
+    image: 'img/1/ramo_princesa_1.jpeg',
+    category: 'ramos',
+    price: 'Desde $160.000',
+    occasion: 'Quinceañera',
+    desc: 'Hermoso ramo elaborado con rosas artesanales en cinta satinada, detalles brillantes y corona decorativa para lucir como una reina en tus quince.',
+    descFull: `Hermoso ramo elaborado con rosas artesanales en cinta satinada, detalles brillantes y corona decorativa para lucir como una reina en tus quince.
+    🌹 24 rosas artesanales  
+    👑 Incluye corona  
+    🎀 Colores personalizables`,
+    images: ['img/1/ramo_princesa_1.jpeg', 'img/1/ramo_princesa_2.jpeg', 'img/1/ramo_princesa_3.jpeg']
   },
   {
     id: 2,
-    name: 'Desayuno romantico con ramo rojo',
-    image: 'img/desayuno-romantico-rojo.jpg',
-    category: 'desayunos',
-    price: 'Desde $80.000',
-    occasion: 'Aniversario',
-    desc: 'Desayuno sorpresa con decoracion romantica, globo y ramo rojo en tela.',
-    descFull: 'Desayuno sorpresa presentado en bandeja decorada con globos, lazo y ramo artesanal en tela color rojo. Ideal para aniversarios, celebraciones romanticas y detalles especiales con entrega a domicilio.'
+    name: '✨ Ramo Encanto',
+    image: 'img/2/ramo_encanto_1.jpeg',
+    category: 'ramos',
+    price: 'Desde $150.000',
+    occasion: 'Quinceañera',
+    desc: 'Diseño elegante y delicado elaborado con rosas artesanales en cinta satinada. Perfecto para una quinceañera sofisticada y moderna.',
+    descFull: `Diseño elegante y delicado elaborado con rosas artesanales en cinta satinada. Perfecto para una quinceañera sofisticada y moderna.
+    🌹 24 rosas artesanales  
+    🎀 Colores personalizables`,
+    images: ['img/2/ramo_encanto_1.jpeg', 'img/2/ramo_encanto_2.jpeg', 'img/2/ramo_encanto_3.jpeg', 'img/2/ramo_encanto_4.jpeg']
   },
   {
     id: 3,
-    name: 'Detalle rosa con bouquet floral',
-    image: 'img/detalle-rosa-globo.jpg',
+    name: 'Golden love',
+    image: 'img/3/golden_love.jpeg',
     category: 'especiales',
-    price: 'Desde $55.000',
-    occasion: 'Dia de la madre',
-    desc: 'Caja decorativa en tonos rosados con globo, mug y ramo floral delicado.',
-    descFull: 'Detalle decorativo en caja de madera con acabados rosados, globo metalizado, mug personalizado y bouquet floral artesanal. Ideal para sorprender en fechas especiales como Dia de la madre, cumpleanos o celebraciones femeninas.'
+    price: 'Desde $80.000',
+    occasion: 'Amor y regalo',
+    desc: 'Caja sorpresa premium con osito, chocolates y rosas artesanales.',
+    descFull: `Caja sorpresa premium con osito, chocolates y rosas artesanales.
+    🌹 8 rosas aprox.
+    🎀 Colores personalizables.`,
+    images: ['img/3/golden_love.jpeg']
   },
   {
     id: 4,
-    name: 'Ramo rosa tonos pastel',
-    image: 'img/ramo-rosa-pastel.jpg',
-    category: 'ramos',
-    price: 'Desde $35.000',
-    occasion: 'Cumpleanos',
-    desc: 'Ramo artesanal en tela color rosa pastel con acabado delicado y decoracion elegante.',
-    descFull: 'Bouquet elaborado a mano con rosas en tela color rosa pastel, detalles decorativos y envoltura delicada. Perfecto para cumpleanos, detalles tiernos y celebraciones especiales.'
+    name: 'Feliz cumpleaños',
+    image: 'img/4/cumpleanos_azul_1.jpeg',
+    category: 'especiales',
+    price: 'Desde $80.000',
+    occasion: 'Cumpleaños',
+    desc: 'Hermoso arreglo con osito decorativo y rosas en diseño escalonado.',
+    descFull: `Hermoso arreglo con osito decorativo y rosas en diseño escalonado.
+    🌹 9 rosas aprox.
+    🎀 Colores personalizables.`,
+    images: ['img/4/cumpleanos_azul_1.jpeg', 'img/4/cumpleanos_azul_2.jpeg']
   },
   {
     id: 5,
-    name: 'Bouquet rojo eterno',
-    image: 'img/ramo-rojo-eterno.jpg',
+    name: 'Love Luxury Box',
+    image: 'img/5/feliz_dia_1.jpeg',
+    category: 'especiales',
+    price: 'Desde $70.000',
+    occasion: 'San Valentín',
+    desc: 'Hermoso detalle en caja cilíndrica transparente con rosas artesanales en cinta satinada, mini osito decorativo, chocolates y globo metálico en forma de corazón. Ideal para enamorar y sorprender.',
+    descFull: `Hermoso detalle en caja cilíndrica transparente con rosas artesanales en cinta satinada, mini osito decorativo, chocolates y globo metálico en forma de corazón. Ideal para enamorar y sorprender.
+    🌹 Incluye 4 rosas artesanales
+    🐻 Incluye mini osito decorativo
+    🍫 Incluye chocolates
+    ❤️ Incluye globo metálico corazón
+    🎀 Colores de flores personalizables según gusto del cliente.`,
+    images: ['img/5/feliz_dia_1.jpeg']
+  },
+  {
+    id: 6,
+    name: 'Mug sorpresa decorado',
+    image: 'img/6/feliz_dia_mama_1.jpeg',
+    category: 'especiales',
+    price: 'Desde $20.000',
+    occasion: 'Día de las madres',
+    desc: 'Mug sorpresa decorado con flor artesanal, mini osito y chocolates.',
+    descFull: `Mug sorpresa decorado con flor artesanal, mini osito y chocolates.
+    🌹 1 rosa grande artesanal
+    🎀 Color personalizable.`,
+    images: ['img/6/feliz_dia_mama_1.jpeg']
+  },
+  {
+    id: 7,
+    name: 'Morning Love',
+    image: 'img/7/desayuno_rojo_1.jpeg',
+    category: 'desayunos',
+    price: 'Desde $150.000',
+    occasion: 'Desayuno sorpresa',
+    desc: 'Combo desayuno sorpresa acompañado de hermoso ramo artesanal.',
+    descFull: `Combo desayuno sorpresa acompañado de hermoso ramo artesanal.
+    🌹 12 rosas aprox.
+    🎀 Colores personalizables.`,
+    images: ['img/7/desayuno_rojo_1.jpeg']
+  },
+  {
+    id: 8,
+    name: 'Sweet Morning',
+    image: 'img/8/desayuno_rosa_1.jpeg',
+    category: 'desayunos',
+    price: 'Desde $150.000',
+    occasion: 'Desayuno sorpresa',
+    desc: 'Desayuno sorpresa + mug decorado + mini ramo artesanal.',
+    descFull: `Desayuno sorpresa + mug decorado + mini ramo artesanal.
+    🌹 5 rosas aprox.
+    🎀 Colores personalizables.`,
+    images: ['img/8/desayuno_rosa_1.jpeg']
+  },
+  {
+    id: 9,
+    name: 'Cheers Box',
+    image: 'img/9/chocolate_corona_1.jpeg',
+    category: 'especiales',
+    price: 'Desde $45.000',
+    occasion: 'Caballeros',
+    desc: 'Caja especial con cervezas, chocolates y rosas artesanales.',
+    descFull: `Caja especial con cervezas, chocolates y rosas artesanales.
+    🌹 3 rosas
+    🍫 3 chocolates
+    🎀 Colores personalizables.`,
+    images: ['img/9/chocolate_corona_1.jpeg']
+  },
+  {
+    id: 10,
+    name: 'King Style',
+    image: 'img/10/caja_gorra_1.jpeg',
+    category: 'especiales',
+    price: 'Desde $60.000',
+    occasion: 'Caballeros',
+    desc: 'Caja premium con gorra, chocolates y rosas artesanales.',
+    descFull: `Caja premium con gorra, chocolates y rosas artesanales.
+    🌹 4 rosas
+    🍫 3 chocolates
+    🎀 Colores personalizables.`,
+    images: ['img/10/caja_gorra_1.jpeg', 'img/10/caja_gorra_2.jpeg']
+  },
+  {
+    id: 11,
+    name: 'Bouquet Jardín de Amor',
+    image: 'img/11/buquet_jardin_amor_1.jpeg',
     category: 'ramos',
-    price: 'Desde $65.000',
-    occasion: 'San Valentin',
-    desc: 'Ramo de rosas rojas en tela con estilo romantico y presentacion llamativa.',
-    descFull: 'Bouquet artesanal de rosas rojas en tela con envoltura decorativa y acabado romantico. Ideal para San Valentin, aniversarios y detalles de amor duraderos.'
+    price: 'Desde $60.000',
+    occasion: 'Ocasión especial',
+    desc: 'Combinación de flores en cinta cuidadosamente elaboradas para brindar belleza, estilo y duración. Ideal para decorar y regalar.',
+    descFull: `Combinación de flores en cinta cuidadosamente elaboradas para brindar belleza, estilo y duración. Ideal para decorar y regalar.
+    🌹 9 rosas y 1 girasol
+    🎀 Colores personalizables.`,
+    images: ['img/11/buquet_jardin_amor_1.jpeg']
+  },
+  {
+    id: 12,
+    name: 'Bouquet de Girasoles',
+    image: 'img/12/buquet_girasol_1.jpeg',
+    category: 'ramos',
+    price: 'Desde $80.000',
+    occasion: 'Ocasión especial',
+    desc: 'Hermoso ramo de girasoles elaborado en cinta de tela, con diseño llamativo, elegante y lleno de alegría. Ideal para sorprender con un regalo original que perdura en el tiempo.',
+    descFull: `Hermoso ramo de girasoles elaborado en cinta de tela, con diseño llamativo, elegante y lleno de alegría. Ideal para sorprender con un regalo original que perdura en el tiempo.
+    🌻 7 girasoles artesanales
+    🎀 Colores personalizables.`,
+    images: ['img/12/buquet_girasol_1.jpeg']
+  },
+  {
+    id: 13,
+    name: 'Llavero Floral Personalizado',
+    image: 'img/13/llaveros_1.jpeg',
+    category: 'personalizados',
+    price: 'Desde $10.000',
+    occasion: 'Detalle personalizado',
+    desc: 'Hermoso llavero artesanal en forma de rosa elaborado en cinta de tela satinada. Un detalle elegante, práctico y encantador para regalar o llevar contigo.',
+    descFull: `Hermoso llavero artesanal en forma de rosa elaborado en cinta de tela satinada. Un detalle elegante, práctico y encantador para regalar o llevar contigo.
+    La persona elige el color de la flor según su gusto.
+    Perfecto para regalar en:
+    Cumpleaños
+    Día de las Madres
+    San Valentín
+    Recuerdos para eventos
+    Detalles sorpresa
+    Regalos empresariales
+    🎀 Colores personalizables.`,
+    images: ['img/13/llaveros_1.jpeg']
+  },
+  {
+    id: 14,
+    name: 'Girasol Solitario',
+    image: 'img/14/girasol_solitario_1.jpeg',
+    category: 'ramos',
+    price: 'Desde $15.000',
+    occasion: 'Pequeño detalle',
+    desc: 'Elegante girasol elaborado en cinta de tela con acabado artesanal y presentación moderna. Un detalle sencillo, hermoso y lleno de significado.',
+    descFull: `Elegante girasol elaborado en cinta de tela con acabado artesanal y presentación moderna. Un detalle sencillo, hermoso y lleno de significado.
+    Perfecto para regalar en cumpleaños, agradecimientos, detalles sorpresa o para alegrarle el día a alguien especial.
+
+    🎀 Colores personalizables.`,
+    images: ['img/14/girasol_solitario_1.jpeg']
+  },
+  {
+    id: 15,
+    name: 'Bouquet Pasión',
+    image: 'img/15/buquet_pasion_1.jpeg',
+    category: 'ramos',
+    price: 'Desde $60.000',
+    occasion: 'San Valentín',
+    desc: 'Bouquet especial elaborado con 12 hermosas rosas rojas, diseñado para transmitir elegancia, amor y distinción. Su presentación delicada y estilo romántico lo convierten en el detalle perfecto para aniversarios, cumpleaños, San Valentín o cualquier ocasión especial.',
+    descFull: `Bouquet especial elaborado con 12 hermosas rosas rojas, diseñado para transmitir elegancia, amor y distinción. 
+    Su presentación delicada y estilo romántico lo convierten en el detalle perfecto para aniversarios, cumpleaños, San Valentín o cualquier ocasión especial.
+    🎀 Colores personalizables.`,
+    images: ['img/15/buquet_pasion_1.jpeg']
+  },
+  {
+    id: 16,
+    name: 'Bouquet Romance',
+    image: 'img/16/buquet_romance_1.jpeg',
+    category: 'ramos',
+    price: 'Desde $60.000',
+    occasion: 'Aniversario',
+    desc: 'Diseño especial lleno de elegancia y ternura, elaborado con una hermosa combinación de 2 colores que realza su belleza y estilo. Perfecto para aniversarios, cumpleaños, San Valentín o cualquier ocasión especial.',
+    descFull: `Diseño especial lleno de elegancia y ternura, elaborado con una hermosa combinación de 2 colores que realza su belleza y estilo. Perfecto para aniversarios, cumpleaños, San Valentín o cualquier ocasión especial.
+    🎀 Colores personalizables.`,
+    images: ['img/16/buquet_romance_1.jpeg']
+  },
+  {
+    id: 17,
+    name: 'Lapicero Floral Personalizado',
+    image: 'img/17/lapicero_floral_1.jpeg',
+    category: 'personalizados',
+    price: 'Desde $15.000',
+    occasion: 'Detalle personalizado',
+    desc: 'Elegante lapicero decorado con una hermosa rosa elaborada en cinta de tela satinada. Un detalle útil, delicado y original que combina belleza y funcionalidad. Ideal para sorprender con un regalo especial o entregar como recuerdo en eventos importantes.',
+    descFull: `Elegante lapicero decorado con una hermosa rosa elaborada en cinta de tela satinada. Un detalle útil, delicado y original que combina belleza y funcionalidad.
+    Ideal para sorprender con un regalo especial o entregar como recuerdo en eventos importantes.
+    Perfecto para:
+    Recuerdos de eventos
+    Detalles sorpresa
+    Regalos empresariales
+    Cumpleaños
+    Día de las Madres
+    San Valentín
+    Baby shower
+    Bodas y quinceaños
+    Graduaciones
+    Cualquier ocasión especial
+    🎀 Colores personalizables.`,
+    images: ['img/17/lapicero_floral_1.jpeg']
   }
 ];
 let q = null;
 let t = 'existing';
+let modalImages = [];
+function formatDescBody(s) {
+  if (s == null || s === '') return '';
+  return String(s)
+    .replace(/\r\n/g, '\n')
+    .split('\n')
+    .map((line) => line.trim())
+    .join('\n')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+}
 const l = (z) => `https://wa.me/${n}?text=${encodeURIComponent(z)}`;
 const h = (z) => window.open(l(z), '_blank', 'noopener');
 const e = (k) => ({ ramos: 'Ramos en tela', desayunos: 'Desayunos', personalizados: 'Personalizado', especiales: 'Ocasion especial' }[k] || k);
@@ -1621,18 +1870,33 @@ function v(k = 'todos') {
   g.innerHTML = r.map((x) => `<div class="product-card" onclick="o(${x.id})"><div class="card-img" style="background-image:url('${x.image}');"><div class="card-cat-badge">${e(x.category)}</div><div class="card-occasion">${x.occasion}</div></div><div class="card-body"><div class="card-name">${x.name}</div><div class="card-desc">${x.desc}</div><div class="card-footer"><div class="card-price">${x.price}<small>+ domicilio adicional</small></div><button class="card-wa-btn" onclick="event.stopPropagation();j(${x.id})">Lo quiero</button></div></div></div>`).join('');
 }
 function f(k, b) { document.querySelectorAll('.filter-btn').forEach((x) => x.classList.remove('active')); b.classList.add('active'); v(k); }
+function g(idx) {
+  if (!modalImages.length || idx < 0 || idx >= modalImages.length) return;
+  const i = document.getElementById('modalImg');
+  i.style.backgroundImage = `url('${modalImages[idx]}')`;
+  document.querySelectorAll('#modalThumbs .modal-thumb').forEach((btn, j) => btn.classList.toggle('active', j === idx));
+}
 function o(id) {
   const x = d.find((r) => r.id === id);
   if (!x) return;
   q = x;
+  modalImages = (Array.isArray(x.images) && x.images.length) ? x.images.slice() : [x.image];
+  const thumbs = document.getElementById('modalThumbs');
+  if (modalImages.length > 1) {
+    thumbs.hidden = false;
+    thumbs.innerHTML = modalImages.map((src, idx) => `<button type="button" class="modal-thumb${idx === 0 ? ' active' : ''}" style="background-image:url('${src}')" aria-label="Foto ${idx + 1} de ${modalImages.length}" onclick="g(${idx})"></button>`).join('');
+  } else {
+    thumbs.hidden = true;
+    thumbs.innerHTML = '';
+  }
   const i = document.getElementById('modalImg');
-  i.style.backgroundImage = `url('${x.image}')`;
+  i.style.backgroundImage = `url('${modalImages[0]}')`;
   i.style.backgroundSize = 'contain';
   i.style.backgroundPosition = 'center';
   document.getElementById('modalCat').textContent = e(x.category);
   document.getElementById('modalTitle').textContent = x.name;
   document.getElementById('modalOccasion').textContent = x.occasion;
-  document.getElementById('modalDesc').textContent = x.descFull || x.desc;
+  document.getElementById('modalDesc').textContent = formatDescBody(x.descFull || x.desc);
   document.getElementById('modalPrice').textContent = x.price;
   t = 'existing';
   document.getElementById('tag-existing').classList.add('selected');
@@ -1644,8 +1908,14 @@ function o(id) {
   document.body.style.overflow = 'hidden';
 }
 function x(a) {
-  if (!a || a.target === document.getElementById('productModal') || a.type === 'click') {
-    document.getElementById('productModal').classList.remove('open');
+  const overlay = document.getElementById('productModal');
+  if (!a) {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+    return;
+  }
+  if (a.target === overlay) {
+    overlay.classList.remove('open');
     document.body.style.overflow = '';
   }
 }
@@ -1716,10 +1986,10 @@ function r() {
 }
 function b() {
   document.addEventListener('contextmenu', (ev) => {
-    if (ev.target.closest('.card-img, .modal-img')) ev.preventDefault();
+    if (ev.target.closest('.card-img, .modal-img, .modal-thumb')) ev.preventDefault();
   });
   document.addEventListener('dragstart', (ev) => {
-    if (ev.target.closest('.card-img, .modal-img')) ev.preventDefault();
+    if (ev.target.closest('.card-img, .modal-img, .modal-thumb')) ev.preventDefault();
   });
 }
 window.addEventListener('DOMContentLoaded', () => { v(); a(); r(); b(); });
