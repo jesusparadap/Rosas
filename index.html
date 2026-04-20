@@ -3,6 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; script-src 'self'; connect-src 'self'; form-action 'self'; upgrade-insecure-requests; block-all-mixed-content">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta name="robots" content="index,follow,noarchive">
+<meta name="copyright" content="Rosas Eternas Janeth">
+<link rel="canonical" href="https://www.rosaseternasjaneth.com/">
 <title>Rosas Eternas — Flores artesanales y desayunos sorpresa</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -1282,7 +1289,7 @@
     <li><a href="#contacto">Contacto</a></li>
     <li><a href="#" class="nav-wa" id="navWa">Pedir ahora</a></li>
   </ul>
-  <div class="hamburger" id="hamburger" onclick="m()">
+  <div class="hamburger" id="hamburger">
     <span></span><span></span><span></span>
   </div>
 </nav>
@@ -1351,11 +1358,11 @@
   </div>
 
   <div class="filter-bar reveal">
-    <button class="filter-btn active" onclick="f('todos', this)">Todos</button>
-    <button class="filter-btn" onclick="f('ramos', this)">Ramos en tela</button>
-    <button class="filter-btn" onclick="f('desayunos', this)">Desayunos sorpresa</button>
-    <button class="filter-btn" onclick="f('personalizados', this)">Personalizados</button>
-    <button class="filter-btn" onclick="f('especiales', this)">Ocasiones especiales</button>
+    <button class="filter-btn active" data-filter="todos">Todos</button>
+    <button class="filter-btn" data-filter="ramos">Ramos en tela</button>
+    <button class="filter-btn" data-filter="desayunos">Desayunos sorpresa</button>
+    <button class="filter-btn" data-filter="personalizados">Personalizados</button>
+    <button class="filter-btn" data-filter="especiales">Ocasiones especiales</button>
   </div>
 
   <div class="catalog-grid" id="catalogGrid"></div>
@@ -1440,34 +1447,34 @@
       <div class="form-group">
         <label>Colores deseados</label>
         <div class="color-tags" id="colorTags">
-          <span class="color-tag" onclick="c(this)" data-color="Rosa">
+          <span class="color-tag" data-color="Rosa">
             <span class="dot" style="background:#e8b4b8;"></span> Rosa
           </span>
-          <span class="color-tag" onclick="c(this)" data-color="Lila">
+          <span class="color-tag" data-color="Lila">
             <span class="dot" style="background:#d8c5e0;"></span> Lila
           </span>
-          <span class="color-tag" onclick="c(this)" data-color="Blanco">
+          <span class="color-tag" data-color="Blanco">
             <span class="dot" style="background:#f0f0f0; border:1px solid #ddd;"></span> Blanco
           </span>
-          <span class="color-tag" onclick="c(this)" data-color="Rojo">
+          <span class="color-tag" data-color="Rojo">
             <span class="dot" style="background:#e57373;"></span> Rojo
           </span>
-          <span class="color-tag" onclick="c(this)" data-color="Naranja">
+          <span class="color-tag" data-color="Naranja">
             <span class="dot" style="background:#ffb74d;"></span> Naranja
           </span>
-          <span class="color-tag" onclick="c(this)" data-color="Amarillo">
+          <span class="color-tag" data-color="Amarillo">
             <span class="dot" style="background:#fff176;border:1px solid #ddd;"></span> Amarillo
           </span>
-          <span class="color-tag" onclick="c(this)" data-color="Azul">
+          <span class="color-tag" data-color="Azul">
             <span class="dot" style="background:#90caf9;"></span> Azul
           </span>
-          <span class="color-tag" onclick="c(this)" data-color="Verde">
+          <span class="color-tag" data-color="Verde">
             <span class="dot" style="background:#a5d6a7;"></span> Verde
           </span>
-          <span class="color-tag" onclick="c(this)" data-color="Beige">
+          <span class="color-tag" data-color="Beige">
             <span class="dot" style="background:#f5ede6;border:1px solid #ddd;"></span> Beige
           </span>
-          <span class="color-tag" onclick="c(this)" data-color="Sorpréndeme">
+          <span class="color-tag" data-color="Sorpréndeme">
             <span class="dot" style="background: conic-gradient(red,yellow,green,blue,red);"></span> Sorpréndeme
           </span>
         </div>
@@ -1502,7 +1509,7 @@
         <textarea id="pf-detalles" rows="2" placeholder="Algo más que quieras contarnos..."></textarea>
       </div>
 
-      <button class="btn-primary" style="width:100%;margin-top:0.5rem;justify-content:center;" onclick="p()">
+      <button class="btn-primary" id="personalizeSubmit" style="width:100%;margin-top:0.5rem;justify-content:center;">
         Enviar por WhatsApp
       </button>
     </div>
@@ -1591,6 +1598,7 @@
   <p style="font-family:'Cormorant Garamond',serif; font-size:1.3rem; font-style:italic; color:var(--rose-light); margin-bottom:0.5rem;">Rosas Eternas</p>
   <p>Porque el amor no se marchita — Detalles hechos con amor para momentos especiales ✦</p>
   <p style="margin-top:0.5rem;">Pedidos por WhatsApp · Tienda física en Conjunto Residencial Ceiba (Soledad) · Domicilio con costo adicional</p>
+  <p style="margin-top:0.5rem;font-size:0.8rem;color:var(--text-soft);">Contenido, fotografias y marca protegidos. Uso no autorizado o suplantacion comercial prohibidos.</p>
 </footer>
 
 <!-- FLOATING WA -->
@@ -1602,9 +1610,9 @@
 </a>
 
 <!-- PRODUCT DETAIL MODAL -->
-<div class="modal-overlay" id="productModal" onclick="x(event)">
+<div class="modal-overlay" id="productModal">
   <div class="modal" id="modalContent">
-    <button class="modal-close" onclick="x()">✕</button>
+    <button class="modal-close" id="modalCloseBtn">✕</button>
     <div class="modal-visual">
       <div class="modal-img" id="modalImg"></div>
       <div class="modal-thumbs" id="modalThumbs" hidden></div>
@@ -1623,8 +1631,8 @@
       <div class="modal-customize">
         <h4>¿Cómo quieres tu pedido?</h4>
         <div>
-          <span class="custom-tag selected" id="tag-existing" onclick="s('existing')">Diseño existente</span>
-          <span class="custom-tag" id="tag-custom" onclick="s('custom')">Quiero personalizarlo</span>
+          <span class="custom-tag selected" id="tag-existing">Diseño existente</span>
+          <span class="custom-tag" id="tag-custom">Quiero personalizarlo</span>
         </div>
         <div class="modal-form" id="modalCustomForm" style="margin-top:1rem; display:none;">
           <label>Color o detalle especial</label>
@@ -1633,7 +1641,7 @@
           <textarea id="modal-message" rows="2" placeholder="Ej: Para mi mamá con amor..."></textarea>
         </div>
       </div>
-      <button class="modal-wa-btn" id="modalWaBtn" onclick="w()">
+      <button class="modal-wa-btn" id="modalWaBtn">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
           <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
           <path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.557 4.118 1.527 5.847L0 24l6.335-1.509A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.007-1.368l-.36-.214-3.729.978.995-3.645-.235-.374A9.82 9.82 0 012.182 12 9.818 9.818 0 0112 2.182 9.818 9.818 0 0121.818 12 9.818 9.818 0 0112 21.818z"/>
@@ -1644,447 +1652,12 @@
   </div>
 </div>
 
-<div class="image-zoom-overlay" id="imageZoom" onclick="cz(event)">
+<div class="image-zoom-overlay" id="imageZoom">
   <div class="image-zoom-content">
-    <button class="image-zoom-close" type="button" onclick="cz()">✕</button>
+    <button class="image-zoom-close" id="imageZoomClose" type="button">✕</button>
     <img id="imageZoomImg" class="image-zoom-img" src="" alt="Vista ampliada del producto">
   </div>
 </div>
-<script>
-const n = '573016356319';
-const d = [
-  {
-    id: 1,
-    name: '👑 Ramo Princesa',
-    image: 'img/1/ramo_princesa_1.jpeg',
-    category: 'ramos',
-    price: 'Desde $160.000',
-    occasion: 'Quinceañera',
-    desc: 'Hermoso ramo elaborado con rosas artesanales en cinta satinada, detalles brillantes y corona decorativa para lucir como una reina en tus quince.',
-    descFull: `Hermoso ramo elaborado con rosas artesanales en cinta satinada, detalles brillantes y corona decorativa para lucir como una reina en tus quince.
-    🌹 Incluye 24 rosas artesanales  
-    👑 Incluye corona  
-    🎀 Colores personalizables`,
-    images: ['img/1/ramo_princesa_1.jpeg', 'img/1/ramo_princesa_2.jpeg', 'img/1/ramo_princesa_3.jpeg']
-  },
-  {
-    id: 2,
-    name: '✨ Ramo Encanto',
-    image: 'img/2/ramo_encanto_1.jpeg',
-    category: 'ramos',
-    price: 'Desde $150.000',
-    occasion: 'Quinceañera',
-    desc: 'Diseño elegante y delicado elaborado con rosas artesanales en cinta satinada. Perfecto para una quinceañera sofisticada y moderna.',
-    descFull: `Diseño elegante y delicado elaborado con rosas artesanales en cinta satinada. Perfecto para una quinceañera sofisticada y moderna.
-    🌹 Incluye 24 rosas artesanales  
-    🎀 Colores personalizables`,
-    images: ['img/2/ramo_encanto_1.jpeg', 'img/2/ramo_encanto_2.jpeg', 'img/2/ramo_encanto_3.jpeg', 'img/2/ramo_encanto_4.jpeg']
-  },
-  {
-    id: 3,
-    name: 'Golden love',
-    image: 'img/3/golden_love.jpeg',
-    category: 'especiales',
-    price: 'Desde $80.000',
-    occasion: 'Amor y regalo',
-    desc: 'Caja sorpresa premium con osito, chocolates y rosas artesanales.',
-    descFull: `Caja sorpresa premium con osito, chocolates y rosas artesanales.
-    🌹 Incluye 5 rosas
-    🎀 Colores personalizables.`,
-    images: ['img/3/golden_love.jpeg']
-  },
-  {
-    id: 4,
-    name: 'Blue Bear',
-    image: 'img/4/cumpleanos_azul_1.jpeg',
-    category: 'especiales',
-    price: 'Desde $80.000',
-    occasion: 'Cumpleaños',
-    desc: 'Hermoso arreglo con osito decorativo y rosas en diseño escalonado.',
-    descFull: `Hermoso arreglo con osito decorativo y rosas en diseño escalonado.
-    🌹 Incluye 8 rosas
-    🎀 Colores personalizables`,
-    images: ['img/4/cumpleanos_azul_1.jpeg', 'img/4/cumpleanos_azul_2.jpeg']
-  },
-  {
-    id: 5,
-    name: 'Love Luxury Box',
-    image: 'img/5/feliz_dia_1.jpeg',
-    category: 'especiales',
-    price: 'Desde $70.000',
-    occasion: 'San Valentín',
-    desc: 'Hermoso detalle en caja cilíndrica transparente con rosas artesanales en cinta satinada, mini osito decorativo, chocolates y globo metálico en forma de corazón. Ideal para enamorar y sorprender.',
-    descFull: `Hermoso detalle en caja cilíndrica transparente con rosas artesanales en cinta satinada, mini osito decorativo, chocolates y globo metálico en forma de corazón. Ideal para enamorar y sorprender.
-    🌹 Incluye 3 rosas artesanales
-    🐻 Incluye mini osito decorativo
-    🍫 Incluye chocolates
-    ❤️ Incluye globo metálico corazón
-    🎀 Colores de flores personalizables según gusto del cliente.`,
-    images: ['img/5/feliz_dia_1.jpeg']
-  },
-  {
-    id: 6,
-    name: 'Mug sorpresa decorado',
-    image: 'img/6/feliz_dia_mama_1.jpeg',
-    category: 'especiales',
-    price: 'Desde $20.000',
-    occasion: 'Día de las madres',
-    desc: 'Mug sorpresa decorado con flor artesanal, mini osito y chocolates.',
-    descFull: `Mug sorpresa decorado con flor artesanal, mini osito y chocolates.
-    🌹 Incluye 1 rosa grande artesanal
-    🎀 Color personalizable.`,
-    images: ['img/6/feliz_dia_mama_1.jpeg']
-  },
-  {
-    id: 7,
-    name: 'Morning Love',
-    image: 'img/7/desayuno_rojo_1.jpeg',
-    category: 'desayunos',
-    price: 'Desde $150.000',
-    occasion: 'Desayuno sorpresa',
-    desc: 'Combo desayuno sorpresa acompañado de hermoso ramo artesanal.',
-    descFull: `Combo desayuno sorpresa acompañado de hermoso ramo artesanal.
-    🌹 Incluye 8 rosas
-    🎀 Colores personalizables.`,
-    images: ['img/7/desayuno_rojo_1.jpeg']
-  },
-  {
-    id: 8,
-    name: 'Sweet Morning',
-    image: 'img/8/desayuno_rosa_1.jpeg',
-    category: 'desayunos',
-    price: 'Desde $150.000',
-    occasion: 'Desayuno sorpresa',
-    desc: 'Desayuno sorpresa + mug decorado + mini ramo artesanal.',
-    descFull: `Desayuno sorpresa + mug decorado + mini ramo artesanal.
-    🌹 Incluye 5 rosas
-    🎀 Colores personalizables.`,
-    images: ['img/8/desayuno_rosa_1.jpeg']
-  },
-  {
-    id: 9,
-    name: 'Cheers Box',
-    image: 'img/9/chocolate_corona_1.jpeg',
-    category: 'especiales',
-    price: 'Desde $45.000',
-    occasion: 'Caballeros',
-    desc: 'Caja especial con cervezas, chocolates y rosas artesanales.',
-    descFull: `Caja especial con cervezas, chocolates y rosas artesanales.
-    🌹 Incluye 3 rosas
-    🍫 Incluye 3 chocolates
-    🎀 Colores personalizables.`,
-    images: ['img/9/chocolate_corona_1.jpeg']
-  },
-  {
-    id: 10,
-    name: 'King Style',
-    image: 'img/10/caja_gorra_1.jpeg',
-    category: 'especiales',
-    price: 'Desde $60.000',
-    occasion: 'Caballeros',
-    desc: 'Caja premium con gorra, chocolates y rosas artesanales.',
-    descFull: `Caja premium con gorra, chocolates y rosas artesanales.
-    🌹 Incluye 4 rosas
-    🍫 Incluye 3 chocolates
-    🎀 Colores personalizables.`,
-    images: ['img/10/caja_gorra_1.jpeg', 'img/10/caja_gorra_2.jpeg']
-  },
-  {
-    id: 11,
-    name: 'Bouquet Jardín de Amor',
-    image: 'img/11/buquet_jardin_amor_1.jpeg',
-    category: 'ramos',
-    price: 'Desde $60.000',
-    occasion: 'Ocasión especial',
-    desc: 'Combinación de flores en cinta cuidadosamente elaboradas para brindar belleza, estilo y duración. Ideal para decorar y regalar.',
-    descFull: `Combinación de flores en cinta cuidadosamente elaboradas para brindar belleza, estilo y duración. Ideal para decorar y regalar.
-    🌹 Incluye 9 rosas
-    🌻 Incluye 1 girasol
-    🎀 Colores personalizables.`,
-    images: ['img/11/buquet_jardin_amor_1.jpeg']
-  },
-  {
-    id: 12,
-    name: 'Bouquet de Girasoles',
-    image: 'img/12/buquet_girasol_1.jpeg',
-    category: 'ramos',
-    price: 'Desde $80.000',
-    occasion: 'Ocasión especial',
-    desc: 'Hermoso ramo de girasoles elaborado en cinta de tela, con diseño llamativo, elegante y lleno de alegría. Ideal para sorprender con un regalo original que perdura en el tiempo.',
-    descFull: `Hermoso ramo de girasoles elaborado en cinta de tela, con diseño llamativo, elegante y lleno de alegría. Ideal para sorprender con un regalo original que perdura en el tiempo.
-    🌻 Incluye 7 girasoles artesanales
-    🎀 Colores personalizables.`,
-    images: ['img/12/buquet_girasol_1.jpeg']
-  },
-  {
-    id: 13,
-    name: 'Llavero Floral Personalizado',
-    image: 'img/13/llaveros_1.jpeg',
-    category: 'personalizados',
-    price: 'Desde $10.000',
-    occasion: 'Detalle personalizado',
-    desc: 'Hermoso llavero artesanal en forma de rosa elaborado en cinta de tela satinada. Un detalle elegante, práctico y encantador para regalar o llevar contigo.',
-    descFull: `Hermoso llavero artesanal en forma de rosa elaborado en cinta de tela satinada. Un detalle elegante, práctico y encantador para regalar o llevar contigo.
-    La persona elige el color de la flor según su gusto.
-    Perfecto para regalar en:
-    Cumpleaños
-    Día de las Madres
-    San Valentín
-    Recuerdos para eventos
-    Detalles sorpresa
-    Regalos empresariales
-    🎀 Colores personalizables.`,
-    images: ['img/13/llaveros_1.jpeg']
-  },
-  {
-    id: 14,
-    name: 'Girasol Solitario',
-    image: 'img/14/girasol_solitario_1.jpeg',
-    category: 'ramos',
-    price: 'Desde $15.000',
-    occasion: 'Pequeño detalle',
-    desc: 'Elegante girasol elaborado en cinta de tela con acabado artesanal y presentación moderna. Un detalle sencillo, hermoso y lleno de significado.',
-    descFull: `Elegante girasol elaborado en cinta de tela con acabado artesanal y presentación moderna. Un detalle sencillo, hermoso y lleno de significado.
-    Perfecto para regalar en cumpleaños, agradecimientos, detalles sorpresa o para alegrarle el día a alguien especial.
-
-    🎀 Colores personalizables.`,
-    images: ['img/14/girasol_solitario_1.jpeg']
-  },
-  {
-    id: 15,
-    name: 'Bouquet Pasión',
-    image: 'img/15/buquet_pasion_1.jpeg',
-    category: 'ramos',
-    price: 'Desde $60.000',
-    occasion: 'San Valentín',
-    desc: 'Bouquet especial elaborado con 12 hermosas rosas rojas, diseñado para transmitir elegancia, amor y distinción. Su presentación delicada y estilo romántico lo convierten en el detalle perfecto para aniversarios, cumpleaños, San Valentín o cualquier ocasión especial.',
-    descFull: `Bouquet especial elaborado con 12 hermosas rosas rojas, diseñado para transmitir elegancia, amor y distinción. 
-    Su presentación delicada y estilo romántico lo convierten en el detalle perfecto para aniversarios, cumpleaños, San Valentín o cualquier ocasión especial.
-
-    🌹 Incluye 12 rosas
-    🎀 Colores personalizables.`,
-    images: ['img/15/buquet_pasion_1.jpeg']
-  },
-  {
-    id: 16,
-    name: 'Bouquet Romance',
-    image: 'img/16/buquet_romance_1.jpeg',
-    category: 'ramos',
-    price: 'Desde $60.000',
-    occasion: 'Aniversario',
-    desc: 'Diseño especial lleno de elegancia y ternura, elaborado con una hermosa combinación de 2 colores que realza su belleza y estilo. Perfecto para aniversarios, cumpleaños, San Valentín o cualquier ocasión especial.',
-    descFull: `Diseño especial lleno de elegancia y ternura, elaborado con una hermosa combinación de 2 colores que realza su belleza y estilo. Perfecto para aniversarios, cumpleaños, San Valentín o cualquier ocasión especial.
-
-    🌹 Incluye 12 rosas
-    🎀 Colores personalizables.`,
-    images: ['img/16/buquet_romance_1.jpeg']
-  },
-  {
-    id: 17,
-    name: 'Lapicero Floral Personalizado',
-    image: 'img/17/lapicero_floral_1.jpeg',
-    category: 'personalizados',
-    price: 'Desde $15.000',
-    occasion: 'Detalle personalizado',
-    desc: 'Elegante lapicero decorado con una hermosa rosa elaborada en cinta de tela satinada. Un detalle útil, delicado y original que combina belleza y funcionalidad. Ideal para sorprender con un regalo especial o entregar como recuerdo en eventos importantes.',
-    descFull: `Elegante lapicero decorado con una hermosa rosa elaborada en cinta de tela satinada. Un detalle útil, delicado y original que combina belleza y funcionalidad.
-    Ideal para sorprender con un regalo especial o entregar como recuerdo en eventos importantes.
-    Perfecto para:
-    Recuerdos de eventos
-    Detalles sorpresa
-    Regalos empresariales
-    Cumpleaños
-    Día de las Madres
-    San Valentín
-    Baby shower
-    Bodas y quinceaños
-    Graduaciones
-    Cualquier ocasión especial
-    🎀 Colores personalizables.`,
-    images: ['img/17/lapicero_floral_1.jpeg']
-  }
-];
-let q = null;
-let t = 'existing';
-let modalImages = [];
-let currentModalImage = '';
-function formatDescBody(s) {
-  if (s == null || s === '') return '';
-  return String(s)
-    .replace(/\r\n/g, '\n')
-    .split('\n')
-    .map((line) => line.trim())
-    .join('\n')
-    .replace(/\n{3,}/g, '\n\n')
-    .trim();
-}
-const l = (z) => `https://wa.me/${n}?text=${encodeURIComponent(z)}`;
-const h = (z) => window.open(l(z), '_blank', 'noopener');
-const e = (k) => ({ ramos: 'Ramos en tela', desayunos: 'Desayunos', personalizados: 'Personalizado', especiales: 'Ocasion especial' }[k] || k);
-function v(k = 'todos') {
-  const g = document.getElementById('catalogGrid');
-  const r = k === 'todos' ? d : d.filter((x) => x.category === k);
-  if (!r.length) {
-    g.innerHTML = '<p style="color:var(--text-soft);grid-column:1/-1;text-align:center;padding:2rem;">No hay productos en esta categoria aun.</p>';
-    return;
-  }
-  g.innerHTML = r.map((x) => `<div class="product-card" onclick="o(${x.id})"><div class="card-img" style="background-image:url('${x.image}');"><div class="card-cat-badge">${e(x.category)}</div><div class="card-occasion">${x.occasion}</div></div><div class="card-body"><div class="card-name">${x.name}</div><div class="card-desc">${x.desc}</div><div class="card-footer"><div class="card-price">${x.price}<small>+ domicilio adicional</small></div><button class="card-wa-btn" onclick="event.stopPropagation();j(${x.id})">Lo quiero</button></div></div></div>`).join('');
-}
-function f(k, b) { document.querySelectorAll('.filter-btn').forEach((x) => x.classList.remove('active')); b.classList.add('active'); v(k); }
-function g(idx) {
-  if (!modalImages.length || idx < 0 || idx >= modalImages.length) return;
-  const i = document.getElementById('modalImg');
-  const src = modalImages[idx];
-  i.style.backgroundImage = `url('${src}')`;
-  currentModalImage = src;
-  document.querySelectorAll('#modalThumbs .modal-thumb').forEach((btn, j) => btn.classList.toggle('active', j === idx));
-}
-function z(ev) {
-  if (ev) ev.stopPropagation();
-  if (!currentModalImage) return;
-  const overlay = document.getElementById('imageZoom');
-  const img = document.getElementById('imageZoomImg');
-  img.src = currentModalImage;
-  overlay.classList.add('open');
-}
-function cz(ev) {
-  const overlay = document.getElementById('imageZoom');
-  if (!ev || ev.target === overlay) {
-    overlay.classList.remove('open');
-    document.getElementById('imageZoomImg').src = '';
-  }
-}
-function o(id) {
-  const x = d.find((r) => r.id === id);
-  if (!x) return;
-  q = x;
-  modalImages = (Array.isArray(x.images) && x.images.length) ? x.images.slice() : [x.image];
-  const thumbs = document.getElementById('modalThumbs');
-  if (modalImages.length > 1) {
-    thumbs.hidden = false;
-    thumbs.innerHTML = modalImages.map((src, idx) => `<button type="button" class="modal-thumb${idx === 0 ? ' active' : ''}" style="background-image:url('${src}')" aria-label="Foto ${idx + 1} de ${modalImages.length}" onclick="g(${idx})"></button>`).join('');
-  } else {
-    thumbs.hidden = true;
-    thumbs.innerHTML = '';
-  }
-  const i = document.getElementById('modalImg');
-  i.style.backgroundSize = 'contain';
-  i.style.backgroundPosition = 'center';
-  g(0);
-  document.getElementById('modalCat').textContent = e(x.category);
-  document.getElementById('modalTitle').textContent = x.name;
-  document.getElementById('modalOccasion').textContent = x.occasion;
-  document.getElementById('modalDesc').textContent = formatDescBody(x.descFull || x.desc);
-  document.getElementById('modalPrice').textContent = x.price;
-  t = 'existing';
-  document.getElementById('tag-existing').classList.add('selected');
-  document.getElementById('tag-custom').classList.remove('selected');
-  document.getElementById('modalCustomForm').style.display = 'none';
-  document.getElementById('modal-color').value = '';
-  document.getElementById('modal-message').value = '';
-  document.getElementById('productModal').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-function x(a) {
-  cz();
-  const overlay = document.getElementById('productModal');
-  if (!a) {
-    overlay.classList.remove('open');
-    document.body.style.overflow = '';
-    return;
-  }
-  if (a.target === overlay) {
-    overlay.classList.remove('open');
-    document.body.style.overflow = '';
-  }
-}
-function s(u) {
-  t = u;
-  document.getElementById('tag-existing').classList.toggle('selected', u === 'existing');
-  document.getElementById('tag-custom').classList.toggle('selected', u === 'custom');
-  document.getElementById('modalCustomForm').style.display = u === 'custom' ? 'block' : 'none';
-}
-function w() {
-  if (!q) return;
-  const c1 = document.getElementById('modal-color').value.trim();
-  const c2 = document.getElementById('modal-message').value.trim();
-  const tp = t === 'existing' ? 'Diseno existente' : 'Personalizado';
-  let z = 'Hola, vi este producto en la web y me interesa.\n\n';
-  z += `*Producto:* ${q.name}\n*Categoria:* ${e(q.category)}\n*Precio base:* ${q.price}\n*Tipo de pedido:* ${tp}\n*Ocasion:* ${q.occasion}\n`;
-  if (c1) z += `*Color / detalles:* ${c1}\n`;
-  if (c2) z += `*Mensaje o dedicatoria:* ${c2}\n`;
-  z += '\nPodemos coordinar el pedido?';
-  h(z);
-}
-function j(id) {
-  const x1 = d.find((r) => r.id === id);
-  if (!x1) return;
-  h(`Hola, vi este producto en la web.\n\n*Producto:* ${x1.name}\n*Precio base:* ${x1.price}\n\nMe compartes mas informacion?`);
-}
-function c(el) { el.classList.toggle('selected'); }
-function p() {
-  const t1 = document.getElementById('pf-tipo').value;
-  const t2 = document.getElementById('pf-ocasion').value;
-  const t3 = document.getElementById('pf-mensaje').value;
-  const t4 = document.getElementById('pf-presupuesto').value;
-  const t5 = document.getElementById('pf-fecha').value;
-  const t6 = document.getElementById('pf-detalles').value;
-  const cs = [...document.querySelectorAll('.color-tag.selected')].map((r) => r.dataset.color).join(', ');
-  if (!t1 && !t2) {
-    alert('Selecciona al menos el tipo de producto y la ocasion.');
-    return;
-  }
-  let z = 'Hola, quiero hacer un pedido personalizado.\n\n';
-  if (t1) z += `*Tipo de producto:* ${t1}\n`;
-  if (t2) z += `*Ocasion:* ${t2}\n`;
-  if (cs) z += `*Colores deseados:* ${cs}\n`;
-  if (t3) z += `*Mensaje/dedicatoria:* ${t3}\n`;
-  if (t4) z += `*Presupuesto aproximado:* ${t4}\n`;
-  if (t5) z += `*Lo necesito para:* ${t5}\n`;
-  if (t6) z += `*Detalles adicionales:* ${t6}\n`;
-  z += '\nPodrian ayudarme con mi pedido?';
-  h(z);
-}
-function m() { document.getElementById('navLinks').classList.toggle('open'); }
-function a() {
-  const z = 'Hola, visite su web y me gustaria recibir informacion sobre sus productos.';
-  document.getElementById('waFloat').href = l(z);
-  document.getElementById('navWa').href = l(z);
-  document.getElementById('contactWaBtn').href = l(z);
-}
-function r() {
-  const io = new IntersectionObserver((xs) => {
-    xs.forEach((u) => {
-      if (u.isIntersecting) {
-        u.target.classList.add('visible');
-        io.unobserve(u.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-  document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
-}
-function b() {
-  document.addEventListener('contextmenu', (ev) => {
-    if (ev.target.closest('.card-img, .modal-img, .modal-thumb')) ev.preventDefault();
-  });
-  document.addEventListener('dragstart', (ev) => {
-    if (ev.target.closest('.card-img, .modal-img, .modal-thumb')) ev.preventDefault();
-  });
-}
-window.addEventListener('DOMContentLoaded', () => {
-  const modalImg = document.getElementById('modalImg');
-  if (modalImg) modalImg.addEventListener('click', z);
-  document.addEventListener('keydown', (ev) => {
-    if (ev.key === 'Escape') {
-      if (document.getElementById('imageZoom').classList.contains('open')) {
-        cz();
-      } else {
-        x();
-      }
-    }
-  });
-  v(); a(); r(); b();
-});
-</script>
+<script defer src="js/app.js"></script>
 </body>
 </html>
